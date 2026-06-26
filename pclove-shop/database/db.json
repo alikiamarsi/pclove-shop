@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Gaming PC RTX 4070",
+      "price": 1800,
+      "image": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/gigabyte/thumb/geforce-rtx-4070-windforce-oc-12g-01_large.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Mechanical Keyboard RGB",
+      "price": 120,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ2n2Bp6dInhZvqVIJ1aVkcqhM3Ggj8h8eRuVuoKEx_ZwN40BFlJzVBGnt&s=10"
+    },
+    {
+      "id": 3,
+      "title": "Gaming Mouse Logitech G502",
+      "price": 80,
+      "image": "https://inventus.com.tr/Images/products/v3/zoomed/15005_01.jpg"
+    },
+    {
+      "id": 4,
+      "title": "27 inch 144Hz Monitor",
+      "price": 300,
+      "image": "https://cdn.dsmcdn.com/mnresize/400/-/ty1811/prod/QC_PREP/20260112/14/ab369f01-44ae-3b2f-a30f-ac09de8a1c49/1_org_zoom.jpg"
+    }
+  ]
+}
