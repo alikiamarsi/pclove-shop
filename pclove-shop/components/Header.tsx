@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 
-function Haeder() {
+function Header() {
   return (
     <header className="border-b shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -34,4 +34,4 @@ function Haeder() {
   )
 }
 
-export default Haeder
+export default Header
