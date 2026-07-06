@@ -9,7 +9,7 @@
   "category": "Graphics Card",
   "stock": 12,
   "rating": 4.8,
-      "image": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/gigabyte/thumb/geforce-rtx-4070-windforce-oc-12g-01_large.jpg"
+      "image": "/images/graphic.jpg"
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@
   "category": "Keyboard",
   "stock": 20,
   "rating": 4.7,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ2n2Bp6dInhZvqVIJ1aVkcqhM3Ggj8h8eRuVuoKEx_ZwN40BFlJzVBGnt&s=10"
+      "image": "/images/keyboard.jpg"
     },
     {
       "id": 3,
@@ -31,7 +31,7 @@
   "category": "Mouse",
   "stock": 18,
   "rating": 4.9,
-      "image": "https://inventus.com.tr/Images/products/v3/zoomed/15005_01.jpg"
+      "image": "/images/mouse.jpg"
     },
     {
       "id": 4,
@@ -42,7 +42,7 @@
   "category": "Monitor",
   "stock": 10,
   "rating": 4.9,
-      "image": "https://cdn.dsmcdn.com/mnresize/400/-/ty1811/prod/QC_PREP/20260112/14/ab369f01-44ae-3b2f-a30f-ac09de8a1c49/1_org_zoom.jpg"
+      "image": "/images/monitor.webp"
     }
   ]
 }
