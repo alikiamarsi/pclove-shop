@@ -8,9 +8,10 @@ type Props = {
 
 function ProductCard({ product }: Props) {
   return (
-    <Link 
+    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg">
+      <Link 
       href={`/products/${product.id}`}
-      className="block overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg"
+      className="block "
     >
 
       <div className="relative h-56 w-full">
@@ -38,12 +39,12 @@ function ProductCard({ product }: Props) {
             ⭐ {product.rating}
           </span>
         </div>
-
-        <button className="mt-2 w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
-          Add to Cart
-        </button>
       </div>
     </Link>
+    <button className="mt-2 w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
+          Add to Cart
+        </button>
+    </div>
     
   );
 }
