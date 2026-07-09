@@ -8,10 +8,10 @@ type Props = {
 
 function ProductCard({ product }: Props) {
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg">
+    <div className="flex h-full flex-col p-4 overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg">
       <Link 
       href={`/products/${product.id}`}
-      className="block "
+      className="block"
     >
 
       <div className="relative h-56 w-full">
@@ -41,7 +41,7 @@ function ProductCard({ product }: Props) {
         </div>
       </div>
     </Link>
-    <button className="mt-2 w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
+    <button className="mt-auto w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
           Add to Cart
         </button>
     </div>
