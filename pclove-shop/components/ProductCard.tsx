@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Product } from "@/types/product";
+import Link from "next/link";
 
 type Props = {
   product: Product;
@@ -7,7 +8,11 @@ type Props = {
 
 function ProductCard({ product }: Props) {
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg">
+    <Link 
+      href={`/products/${product.id}`}
+      className="block overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg"
+    >
+
       <div className="relative h-56 w-full">
         <Image
           src={product.image}
@@ -38,7 +43,8 @@ function ProductCard({ product }: Props) {
           Add to Cart
         </button>
       </div>
-    </div>
+    </Link>
+    
   );
 }
 
