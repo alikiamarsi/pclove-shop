@@ -9,16 +9,20 @@ type Props = {
 };
 
 
-function AddToCardButton({product}: Props) {
+function AddToCartButton({product}: Props) {
     const dispatch = useAppDispatch()
+
+    const handleAddToCart = () => {
+      dispatch(addToCart(product))
+    }
   return (
     <button 
-    onClick={() => dispatch(addToCart(product))}
-    className="w-full rounded-lg bg-blue-600 py-2 text-white"
+    onClick={handleAddToCart}
+    className="w-full cursor-pointer rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition hover:bg-blue-700"
     >
         Add to Cart
     </button>
   )
 }
 
-export default AddToCardButton
+export default AddToCartButton

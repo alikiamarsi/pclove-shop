@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Product } from "@/types/product";
 import Link from "next/link";
+import AddToCartButton from "./AddToCartButton";
 
 type Props = {
   product: Product;
@@ -41,9 +42,7 @@ function ProductCard({ product }: Props) {
         </div>
       </div>
     </Link>
-    <button className="mt-auto w-full rounded-lg bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
-          Add to Cart
-        </button>
+    <AddToCartButton product={product} />
     </div>
     
   );
