@@ -3,6 +3,7 @@
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { useAppSelector } from "@/store/hooks";
+import CategoriesDropdown from "./CategoriesDropdown";
 
 function Header() {
 
@@ -30,6 +31,28 @@ function Header() {
                 className="font-medium transition hover:text-blue-600"
               >
                 Home
+              </Link>
+            </li>
+
+            <li>
+              <CategoriesDropdown />
+            </li>
+
+            <li>
+              <Link
+                href="/support"
+                className="font-medium transition hover:text-blue-600"
+              >
+                Support
+              </Link>
+            </li>
+            
+            <li>
+              <Link 
+                href="/contact"
+                className="font-medium transition hover:text-blue-600"
+              >
+                Contact
               </Link>
             </li>
 
