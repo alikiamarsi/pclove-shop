@@ -12,7 +12,7 @@ function ProductCard({ product }: Props) {
     <div className="flex h-full flex-col p-4 overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg">
       <Link 
       href={`/products/${product.id}`}
-      className="block"
+      className="flex flex-1 flex-col"
     >
 
       <div className="relative h-56 w-full">
@@ -24,14 +24,14 @@ function ProductCard({ product }: Props) {
         />
       </div>
 
-      <div className="space-y-2 p-4">
+      <div className="flex flex-1 flex-col p-4">
         <p className="text-sm text-gray-500">{product.brand}</p>
 
-        <h2 className="line-clamp-2 text-lg font-semibold">
+        <h2 className="mt-2 line-clamp-2 text-lg font-semibold">
           {product.title}
         </h2>
 
-        <div className="flex items-center justify-between">
+        <div className="mt-auto flex items-center justify-between">
           <span className="text-xl font-bold text-blue-600">
             ${product.price}
           </span>
@@ -42,7 +42,9 @@ function ProductCard({ product }: Props) {
         </div>
       </div>
     </Link>
-    <AddToCartButton product={product} />
+    <div className="p-4 pt-0">
+      <AddToCartButton product={product} />
+    </div>
     </div>
     
   );
