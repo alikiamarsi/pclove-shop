@@ -1,7 +1,18 @@
+"use client";
+
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import { useAppSelector } from "@/store/hooks";
 
 function Header() {
+
+  const cartItems = useAppSelector(
+    (state) => state.cart.items
+  )
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  )
   return (
     <header className="border-b bg-white shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -28,9 +39,11 @@ function Header() {
                 className="relative flex items-center"
               >
                 <ShoppingCart className="h-6 w-6 transition hover:text-blue-600" />
-                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-semibold text-white">
-                  0
+                {totalQuantity > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-semibold text-white">
+                  {totalQuantity}
                 </span>
+                )}
 
               </Link>
             </li>
