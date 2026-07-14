@@ -26,7 +26,7 @@ async function ProductDetails({params}: PageProps) {
       <div className="grid gap-10 lg:grid-cols-2">
         {/* Image */}
         <div className="rounded-xl border bg-white p-8 shadow-sm">
-          <div className="relative h-[450px] w-full">
+          <div className="relative `h-112.5` w-full">
             <Image
               src={product.image}
               alt={product.title}
