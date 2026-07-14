@@ -40,24 +40,6 @@ function Header() {
 
             <li>
               <Link
-                href="/support"
-                className="font-medium transition hover:text-blue-600"
-              >
-                Support
-              </Link>
-            </li>
-            
-            <li>
-              <Link 
-                href="/contact"
-                className="font-medium transition hover:text-blue-600"
-              >
-                Contact
-              </Link>
-            </li>
-
-            <li>
-              <Link
                 href="/cart"
                 className="relative flex items-center"
               >
