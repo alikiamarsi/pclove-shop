@@ -6,7 +6,7 @@
   "description": "High-performance graphics card for 1440p and 4K gaming.",
   "price": 799,
   "brand": "MSI",
-  "category": "Graphics Card",
+  "category": "Graphics Cards",
   "stock": 12,
   "rating": 4.8,
       "image": "/images/graphic.jpg"
@@ -17,7 +17,7 @@
   "description": "Mechanical gaming keyboard with Cherry MX switches, RGB lighting, and durable aluminum frame.",
   "price": 169,
   "brand": "Corsair",
-  "category": "Keyboard",
+  "category": "Keyboards",
   "stock": 20,
   "rating": 4.7,
       "image": "/images/keyboard.jpg"
@@ -39,7 +39,7 @@
   "description": "27-inch QHD OLED gaming monitor with a 240Hz refresh rate, 0.03ms response time, and HDR support for an immersive gaming experience.",
   "price": 899,
   "brand": "ASUS",
-  "category": "Monitor",
+  "category": "Monitors",
   "stock": 10,
   "rating": 4.9,
       "image": "/images/monitor.webp"
