@@ -1,4 +1,5 @@
 import AddToCartButton from "@/components/AddToCartButton"
+import WishlistButton from "@/components/WishlistButton"
 import { Product } from "@/types/product"
 import Image from "next/image"
 import Link from "next/link"
@@ -52,11 +53,14 @@ async function ProductDetails({params}: PageProps) {
         {/* Image */}
         <div className="rounded-xl border bg-white p-8 shadow-sm">
           <div className="relative h-112.5 w-full">
+
+            <WishlistButton product={product} />
+
             <Image
               src={product.image}
               alt={product.title}
               fill
-              sizes="(max-witdth: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-contain"
             />
           </div>

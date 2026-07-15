@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Product } from "@/types/product";
 import Link from "next/link";
 import AddToCartButton from "./AddToCartButton";
+import WishlistButton from "./WishlistButton";
 
 type Props = {
   product: Product;
@@ -16,6 +17,9 @@ function ProductCard({ product }: Props) {
     >
 
       <div className="relative h-56 w-full">
+
+        <WishlistButton product={product} />
+
         <Image
           src={product.image}
           alt={product.title}

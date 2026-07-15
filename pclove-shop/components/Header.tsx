@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react"
+import { Heart ,ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { useAppSelector } from "@/store/hooks";
 import CategoriesDropdown from "./CategoriesDropdown";
@@ -15,6 +15,10 @@ function Header() {
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
+  )
+
+  const wishlistItems = useAppSelector(
+    (state) => state.wishlist.items
   )
 
   const [search, setSearch] = useState("");
@@ -73,6 +77,22 @@ function Header() {
 
             <li>
               <CategoriesDropdown />
+            </li>
+
+            <li>
+              <Link
+                href="/wishlist"
+                className="relative fkex items-center"
+              >
+                <Heart className="h-6 w-6 transition hover:text-red-500" />
+
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-semibold text-white">
+                    {wishlistItems.length}
+                  </span>
+                )}
+
+              </Link>
             </li>
 
             <li>
