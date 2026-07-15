@@ -1,6 +1,8 @@
 import AddToCartButton from "@/components/AddToCartButton"
 import { Product } from "@/types/product"
 import Image from "next/image"
+import Link from "next/link"
+
 
 interface PageProps {
     params: Promise<{
@@ -24,6 +26,28 @@ async function ProductDetails({params}: PageProps) {
     const product = await getProduct(id);
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
+      <div className="mb-8 flex items-center gap-2 text-sm text-gray-500">
+        <Link
+          href="/"
+          className="transition hover:text-blue-600"
+        >
+          Home
+        </Link>
+        <span className="text-gray-300">/</span>
+
+        <Link
+          href={`/?category=${encodeURIComponent(product.category)}`}
+          className="transition hover:text-blue-600"
+        >
+          {product.category}
+        </Link>
+
+        <span className="text-gray-300">/</span>
+
+        <span className="max-w-xs truncate text-gray-700">
+          {product.title}
+        </span>
+      </div>
       <div className="grid gap-10 lg:grid-cols-2">
         {/* Image */}
         <div className="rounded-xl border bg-white p-8 shadow-sm">
