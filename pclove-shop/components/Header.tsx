@@ -4,6 +4,8 @@ import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { useAppSelector } from "@/store/hooks";
 import CategoriesDropdown from "./CategoriesDropdown";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function Header() {
 
@@ -14,6 +16,10 @@ function Header() {
     (total, item) => total + item.quantity,
     0
   )
+
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams()
   return (
     <header className="border-b bg-white shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -23,6 +29,37 @@ function Header() {
             >
                 PCLove
             </Link>
+            <div className="relative flex-1 px-8">
+              <input 
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  router.push(`/?search=${encodeURIComponent(search)}`)
+                }
+              }}
+              placeholder="Search Products..."
+              className="w-full rounded-lg border px-4 py-2 text-sm outline-none transition focus:border-blue-500"
+              />
+              {search && (
+                <button
+                  onClick={() => {
+                    setSearch("");
+                    const category = searchParams.get("category");
+
+                    if(category) {
+                      router.push(`/?category=${encodeURIComponent(category)}`);
+                    } else {
+                      router.push("/");
+                    }
+                  }}
+                  className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
             <nav>
           <ul className="flex items-center gap-6">
             <li>
