@@ -1,5 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import { Product } from "@/types/product";
+import Link from "next/link";
 
 type PageProps = {
   searchParams: Promise<{
@@ -35,7 +36,22 @@ async function Home({ searchParams }: PageProps) {
   }
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
-      <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}`: category || "Products"}</h1>
+      {category && (
+        <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
+          <Link
+            href="/"
+            className="transition hover: text-blue-600"
+          >
+            Home
+          </Link>
+          <span className="text-gray-300">/</span>
+
+          <span className="text-gray-700">
+            {category}
+          </span>
+        </div>
+      )}
+      <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.length === 0 ? (
           <p className="col-span-full text-center text-gray-500">
