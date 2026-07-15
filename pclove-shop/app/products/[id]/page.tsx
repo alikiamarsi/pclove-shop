@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/AddToCartButton"
 import { Product } from "@/types/product"
 import Image from "next/image"
 
@@ -7,7 +8,7 @@ interface PageProps {
     }>
 }
 
-async function getProducts(id: string): Promise<Product>{
+async function getProduct(id: string): Promise<Product>{
     const res = await fetch(`http://localhost:5000/products/${id}` ,{
         cache: "no-store",
     });
@@ -20,7 +21,7 @@ async function getProducts(id: string): Promise<Product>{
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
-    const product = await getProducts(id);
+    const product = await getProduct(id);
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
       <div className="grid gap-10 lg:grid-cols-2">
@@ -31,6 +32,7 @@ async function ProductDetails({params}: PageProps) {
               src={product.image}
               alt={product.title}
               fill
+              sizes="(max-witdth: 1024px) 100vw, 50vw"
               className="object-contain"
             />
           </div>
@@ -57,16 +59,15 @@ async function ProductDetails({params}: PageProps) {
           </div>
 
           <p className="text-4xl font-bold text-blue-600">
-            ${product.price}
+            ${product.price.toFixed(2)}
           </p>
 
           <p className="text-green-600 font-medium">
             In Stock: {product.stock}
           </p>
 
-          <button className="w-full rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition hover:bg-blue-700">
-            Add to Cart
-          </button>
+          <AddToCartButton product={product} />
+          
 
           <div className="border-t pt-6">
             <h2 className="mb-2 text-xl font-semibold">
