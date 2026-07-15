@@ -8,9 +8,25 @@ import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/store/cart
 function CartPage() {
     const dispatch = useAppDispatch();
 
-    const cartItems = useAppSelector(
-        (state) => state.cart.items
+    const cartItems = useAppSelector((state) => state.cart.items);
+
+    const subtotal = cartItems.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
     );
+
+    const totalItems = cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+    )
+
+    const shipping = subtotal === 0
+        ? 0
+        : subtotal >= 200
+            ? 0
+            : 10;
+
+    const total = subtotal + shipping; 
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
@@ -23,6 +39,7 @@ function CartPage() {
                 Your cart is empty
             </p>
         ) : (
+            <>
             <div className="space-y-5">
                 {cartItems.map((item) => (
                     <div
@@ -42,7 +59,7 @@ function CartPage() {
                                 {item.title}
                             </h2>
                             <p className="mt-2 text-lg font-bold text-blue-600">
-                            ${item.price}
+                            ${item.price.toFixed(2)}
                         </p>
                         </div>
 
@@ -80,6 +97,53 @@ function CartPage() {
                     </div>
                 ))}
             </div>
+            <div className="mt-10 flex justify-end">
+                <div className="w-full max-w-md rounded-xl border bg-white p-6 shadow-sm">
+                    <h2 className="mb-6 text-xl font-bold">
+                        Order Summary
+                    </h2>
+
+                    <div className="space-y-3">
+                        <div className="flex justify-between text-gray-600">
+                            <span>Items</span>
+                            <span>{totalItems}</span>
+                        </div>
+
+                        <div className="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span>${subtotal.toFixed(2)}</span>
+                        </div>
+
+                        <div className="flex justify-between text-gray-600">
+                            <span>Shipping</span>
+                            <span className="text-green-600">
+                                {shipping === 0 ? (
+                                    <span className="text-green-600">Free</span>
+                                ) : (
+                                    `$${shipping.toFixed(2)}`
+                                )}
+                            </span>
+                        </div>
+
+                        <hr />
+
+                        <div className="flex justify-between text-xl font-bold">
+                            <span>total</span>
+                            <span>${total.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    {subtotal > 0 && subtotal < 200 && (
+                        <p className="mt-4 rounded-lg bg-orange-50 p-3 text-sm text-orange-700">
+                            Add <span className="font-semibold">${(200 - subtotal).toFixed(2)}</span> more
+                            to get <span className="font-semibold">FREE Shipping!</span>
+                        </p>
+                    )}
+                    <button className="mt-6 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700">
+                        Proceed to Chekout
+                    </button>
+                </div>
+            </div>
+            </>
         )}
     </main>
   )
