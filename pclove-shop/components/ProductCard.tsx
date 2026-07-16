@@ -4,13 +4,19 @@ import Link from "next/link";
 import AddToCartButton from "./AddToCartButton";
 import WishlistButton from "./WishlistButton";
 
+
 type Props = {
   product: Product;
+  onHover: (element: HTMLElement) => void
+  onLeave: () => void;
 };
 
-function ProductCard({ product }: Props) {
+function ProductCard({ product, onHover, onLeave }: Props) {
   return (
-    <div className="flex h-full flex-col p-4 overflow-hidden rounded-xl bg-white shadow-sm transition hover:shadow-lg">
+    <div 
+    onMouseEnter={(e) => onHover(e.currentTarget)}
+    onMouseLeave={onLeave}
+    className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
       <Link 
       href={`/products/${product.id}`}
       className="flex flex-1 flex-col"

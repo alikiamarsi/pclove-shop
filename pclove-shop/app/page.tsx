@@ -1,4 +1,5 @@
 import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
 import { Product } from "@/types/product";
 import Link from "next/link";
 
@@ -52,17 +53,7 @@ async function Home({ searchParams }: PageProps) {
         </div>
       )}
       <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.length === 0 ? (
-          <p className="col-span-full text-center text-gray-500">
-            No products found
-          </p>
-        ): (
-          products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
-        )}
-      </div>
+      <ProductGrid products={products} />
     </main>
   );
 }
