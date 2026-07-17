@@ -40,7 +40,7 @@ function Header() {
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  router.push(`/?search=${encodeURIComponent(search)}`)
+                  router.push(`/products?search=${encodeURIComponent(search)}`)
                 }
               }}
               placeholder="Search Products..."
@@ -53,9 +53,9 @@ function Header() {
                     const category = searchParams.get("category");
 
                     if(category) {
-                      router.push(`/?category=${encodeURIComponent(category)}`);
+                      router.push(`/products?category=${encodeURIComponent(category)}`);
                     } else {
-                      router.push("/");
+                      router.push("/oroducts");
                     }
                   }}
                   className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
@@ -72,6 +72,15 @@ function Header() {
                 className="font-medium transition hover:text-blue-600"
               >
                 Home
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/products"
+                className="font-medium transition hover:text-blue-600"
+              >
+                Products
               </Link>
             </li>
 

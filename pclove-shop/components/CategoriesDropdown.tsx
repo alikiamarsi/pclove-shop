@@ -34,7 +34,7 @@ function CategoriesDropdown() {
             {categories.map((category) => (
                 <Link
                     key={category}
-                    href={`/?category=${encodeURIComponent(category)}`}
+                    href={`/products?category=${encodeURIComponent(category)}`}
                     className="block px-4 py-2 transition hover:bg-blue-50 hover:text-blue-600"
                 >
                     {category}
