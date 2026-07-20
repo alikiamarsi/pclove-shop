@@ -33,10 +33,10 @@ function Hero() {
             </Link>
 
             <Link
-              href="/products"
+              href="#categories"
               className="rounded-lg border border-white/20 px-8 py-4 font-semibold text-white transition hover:bg-white/10"
             >
-              Browse Products
+              Explore Categories
             </Link>
           </div>
         </div>
