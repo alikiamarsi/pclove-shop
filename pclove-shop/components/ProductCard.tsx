@@ -7,14 +7,14 @@ import WishlistButton from "./WishlistButton";
 
 type Props = {
   product: Product;
-  onHover: (element: HTMLElement) => void
-  onLeave: () => void;
+  onHover?: (element: HTMLElement) => void
+  onLeave?: () => void;
 };
 
 function ProductCard({ product, onHover, onLeave }: Props) {
   return (
     <div 
-    onMouseEnter={(e) => onHover(e.currentTarget)}
+    onMouseEnter={(e) => onHover?.(e.currentTarget)}
     onMouseLeave={onLeave}
     className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
       <Link 
