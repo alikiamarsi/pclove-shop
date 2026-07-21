@@ -1,6 +1,6 @@
 import AddToCartButton from "@/components/AddToCartButton"
 import WishlistButton from "@/components/WishlistButton"
-import { Product } from "@/types/product"
+import { getproduct } from "@/services/product.service"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -11,20 +11,10 @@ interface PageProps {
     }>
 }
 
-async function getProduct(id: string): Promise<Product>{
-    const res = await fetch(`http://localhost:5000/products/${id}` ,{
-        cache: "no-store",
-    });
-    
-    if(!res.ok) {
-        throw new Error("Failed to fetch product");
-    }
-    return res.json();
-}
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
-    const product = await getProduct(id);
+    const product = await getproduct(id);
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
       <div className="mb-8 flex items-center gap-2 text-sm text-gray-500">

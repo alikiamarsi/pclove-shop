@@ -1,6 +1,5 @@
-import ProductCard from "@/components/ProductCard";
 import ProductGrid from "@/components/ProductGrid";
-import { Product } from "@/types/product";
+import { getProducts } from "@/services/product.service";
 import Link from "next/link";
 
 type PageProps = {
@@ -9,21 +8,6 @@ type PageProps = {
     search?: string
   }>;
 };
-
-async function getProducts(category?: string): Promise<Product[]> {
-
-  const url = category
-    ? `http://localhost:5000/products?category=${encodeURIComponent(category)}`
-    : "http://localhost:5000/products";
-
-  const res = await fetch(url, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  return res.json();
-}
 
 async function Home({ searchParams }: PageProps) {
   const { category, search } = await searchParams;
