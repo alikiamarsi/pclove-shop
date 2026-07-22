@@ -55,7 +55,7 @@ function Header() {
                     if(category) {
                       router.push(`/products?category=${encodeURIComponent(category)}`);
                     } else {
-                      router.push("/oroducts");
+                      router.push("/products");
                     }
                   }}
                   className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
@@ -91,7 +91,7 @@ function Header() {
             <li>
               <Link
                 href="/wishlist"
-                className="relative fkex items-center"
+                className="relative flex items-center"
               >
                 <Heart className="h-6 w-6 transition hover:text-red-500" />
 
