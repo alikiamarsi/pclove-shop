@@ -1,3 +1,4 @@
+import FilterSidebar from "@/components/filters/FilterSidebar";
 import ProductGrid from "@/components/ProductGrid";
 import { getProducts } from "@/services/product.service";
 import Link from "next/link";
@@ -5,14 +6,18 @@ import Link from "next/link";
 type PageProps = {
   searchParams: Promise<{
     category?: string;
-    search?: string
+    search?: string;
+    brand?: string | string[];
   }>;
 };
 
 async function Home({ searchParams }: PageProps) {
-  const { category, search } = await searchParams;
+  const { category, search, brand } = await searchParams;
 
-  let products = await getProducts(category);
+  const brands = Array.isArray(brand)
+    ? brand : brand ? [brand] : [];
+
+  let products = await getProducts(category, brands);
 
   if (search) {
     products = products.filter((product) =>
@@ -37,7 +42,12 @@ async function Home({ searchParams }: PageProps) {
         </div>
       )}
       <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
-      <ProductGrid products={products} />
+     <div className="flex gap-8">
+      <FilterSidebar />
+      <div className="flex-1">
+         <ProductGrid products={products} />
+      </div>
+     </div>
     </main>
   );
 }

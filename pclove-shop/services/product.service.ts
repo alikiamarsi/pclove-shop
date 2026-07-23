@@ -3,6 +3,7 @@ import { Product } from "@/types/product";
 
 export async function getProducts(
   category?: string,
+  brands: string[] = []
 ): Promise<Product[]> {
   const url = category
     ? `${API_URL}/products?category=${encodeURIComponent(category)}`
@@ -16,7 +17,14 @@ export async function getProducts(
     throw new Error("Failed to fetch products");
   }
 
-  return res.json();
+  let products: Product[] = await res.json();
+
+  if(brands.length > 0) {
+    products = products.filter((product) =>
+    brands.includes(product.brand))
+  }
+
+  return products
 }
 
 export async function getproduct(
@@ -31,4 +39,10 @@ export async function getproduct(
     }
 
     return res.json()
+}
+
+export async function getBrands() {
+  const products = await getProducts();
+
+  return [...new Set(products.map((product) => product.brand))].sort();
 }
