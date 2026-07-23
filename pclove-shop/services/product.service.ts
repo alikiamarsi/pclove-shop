@@ -3,7 +3,9 @@ import { Product } from "@/types/product";
 
 export async function getProducts(
   category?: string,
-  brands: string[] = []
+  brands: string[] = [],
+  minPrice?: string,
+  maxPrice?: string
 ): Promise<Product[]> {
   const url = category
     ? `${API_URL}/products?category=${encodeURIComponent(category)}`
@@ -22,6 +24,18 @@ export async function getProducts(
   if(brands.length > 0) {
     products = products.filter((product) =>
     brands.includes(product.brand))
+  }
+
+  if(minPrice) {
+    products = products.filter(
+      (product) => product.price >= Number(minPrice)
+    )
+  }
+
+  if(maxPrice) {
+    products = products.filter(
+      (products) => products.price <= Number(maxPrice)
+    )
   }
 
   return products
