@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation";
+import FilterAccordion from "./FilterAccordion";
 
 type Props = {
     categories: string[];
@@ -12,11 +13,7 @@ function CategoryFilter({categories}: Props) {
 
     const selectedCategory = searchParams.get("category")
   return (
-    <div>
-        <h3 className="mb-3 font-semibold">
-            Category
-        </h3>
-
+    <FilterAccordion title="Category">
         <ul>
             {categories.map((category) => (
                 <li
@@ -39,10 +36,11 @@ function CategoryFilter({categories}: Props) {
                             }
 
                             router.push(
-                                `/products?${params.toString()}`
+                                `/products?${params.toString()}`,
+                                {
+                                    scroll: false,
+                                }
                             );
-
-                            router.refresh();
                         }}
                     />
 
@@ -55,7 +53,7 @@ function CategoryFilter({categories}: Props) {
                 </li>
             ))}
         </ul>
-    </div>
+    </FilterAccordion>
   )
 }
 

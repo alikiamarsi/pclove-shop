@@ -1,5 +1,6 @@
 "use client"
 import { useRouter, useSearchParams } from "next/navigation"
+import FilterAccordion from "./FilterAccordion";
 
 
 function RatingFilter() {
@@ -10,12 +11,8 @@ function RatingFilter() {
 
     const rating = [4, 3, 2, 1];
   return (
-    <div>
-        <h3 className="space-y-2">
-            Rating
-        </h3>
-
-        <ul>
+        <FilterAccordion title="Rating Filter">
+            <ul>
             {rating.map((rating) => (
                 <li
                     key={rating}
@@ -38,7 +35,10 @@ function RatingFilter() {
                         }
 
                         router.push(
-                            `/products?${params.toString()}`
+                            `/products?${params.toString(),
+                            {
+                                scroll: false,
+                            }}`
                         );
                         router.refresh()
                     }}
@@ -54,7 +54,7 @@ function RatingFilter() {
                 </li>
             ))}
         </ul>
-    </div>
+        </FilterAccordion>
   )
 }
 

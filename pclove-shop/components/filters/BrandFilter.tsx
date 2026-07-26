@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import FilterAccordion from "./FilterAccordion";
 
 type Props = {
     brands : string[]
@@ -11,12 +12,8 @@ function BrandFilter({brands}: Props) {
     const searchParams = useSearchParams();
     const selectedBrands = searchParams.getAll("brand");
   return (
-    <div>
-        <h3 className="mb-3 font-semibold">
-            Brand
-        </h3>
-
-        <ul className="space-y-2">
+        <FilterAccordion title="Brand Filter">
+            <ul className="space-y-2">
             {brands.map((brand) => (
                 <li 
                     key={brand}
@@ -40,7 +37,10 @@ function BrandFilter({brands}: Props) {
                                 } else {
                                     params.append("brand", brand);
                                 }
-                                router.push(`?${params.toString()}`)
+                                router.push(`?${params.toString()}`,
+                            {
+                                scroll: false,
+                            })
                             }}
                         />
 
@@ -53,7 +53,7 @@ function BrandFilter({brands}: Props) {
                 </li>
             ))}
         </ul>
-    </div>
+        </FilterAccordion>
   )
 }
 

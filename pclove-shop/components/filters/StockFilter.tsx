@@ -26,7 +26,10 @@ function StockFilter() {
           }
 
           router.push(
-            `/products?${params.toString()}`
+            `/products?${params.toString()}`,
+            {
+              scroll: false,
+            }
           );
 
           router.refresh();

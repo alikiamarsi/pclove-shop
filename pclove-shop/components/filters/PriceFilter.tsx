@@ -1,6 +1,7 @@
 "use client"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react";
+import FilterAccordion from "./FilterAccordion";
 
 
 function PriceFilter() {
@@ -15,12 +16,8 @@ function PriceFilter() {
         searchParams.get("maxPrice") || ""
     )
   return (
-    <div>
-        <h3 className="mb-3 font-semibold">
-            Price
-        </h3>
-
-        <div className="space-y-3">
+        <FilterAccordion title="Price Filter">
+            <div className="space-y-3">
             <input 
                 type="number"
                 placeholder="Min price"
@@ -55,15 +52,17 @@ function PriceFilter() {
                             params.delete("maxPrice");
                         }
 
-                        router.push(`products?${params.toString()}`);
-                        router.refresh()
+                        router.push(`products?${params.toString()}`,
+                    {
+                                scroll: false,
+                            });
                     }}
                     className="w-full rounded bg-blue-600 py-2 text-white"
                 >
                     Apply
                 </button>
         </div>
-    </div>
+        </FilterAccordion>
   )
 }
 
