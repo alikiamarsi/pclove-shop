@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HeaderClient from "./HeaderClient";
+import CategoriesDropdown from "./CategoriesDropdown";
 
 function Header() {
   return (
@@ -12,7 +13,9 @@ function Header() {
           PCLove
         </Link>
 
-        <HeaderClient />
+        <HeaderClient>
+          <CategoriesDropdown />
+        </HeaderClient>
       </div>
     </header>
   );

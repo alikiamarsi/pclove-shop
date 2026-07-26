@@ -3,11 +3,10 @@
 import { useAppSelector } from "@/store/hooks";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import CategoriesDropdown from "./CategoriesDropdown";
+import { ReactNode, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 
-function HeaderClient() {
+function HeaderClient({children}: {children: ReactNode}) {
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -77,7 +76,7 @@ function HeaderClient() {
           </li>
 
           <li>
-            <CategoriesDropdown />
+            {children}
           </li>
 
           <li>

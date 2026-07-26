@@ -6,7 +6,7 @@ async function CategoriesDropdown() {
     const categories = await getCategories();
   return (
     <div className="group relative">
-        <button className="flex items-center gap-1 font-medium transition hover:text-blue-600">
+        <button className="flex items-center gap-1 font-medium transition hover: text-blue-600">
             Categories
             <ChevronDown
             size={18}
