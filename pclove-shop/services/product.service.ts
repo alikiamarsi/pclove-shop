@@ -6,7 +6,8 @@ export async function getProducts(
   brands: string[] = [],
   minPrice?: string,
   maxPrice?: string,
-  rating?: string
+  rating?: string,
+  stock?: string
 ): Promise<Product[]> {
   const url = category
     ? `${API_URL}/products?category=${encodeURIComponent(category)}`
@@ -42,6 +43,12 @@ export async function getProducts(
   if(rating) {
     products = products.filter(
       product => product.rating >= Number(rating)
+    )
+  }
+
+  if(stock === "true") {
+    products = products.filter(
+      (product) => product.stock > 0
     )
   }
 

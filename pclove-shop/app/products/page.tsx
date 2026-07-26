@@ -10,7 +10,8 @@ type PageProps = {
     brand?: string | string[];
     minPrice?: string;
     maxPrice?: string;
-    rating?: string
+    rating?: string;
+    stock?: string
   }>;
 };
 
@@ -21,6 +22,8 @@ async function Home({ searchParams }: PageProps) {
     brand,
     minPrice,
     maxPrice,
+    rating,
+    stock
    } = await searchParams;
 
   const selectedBrands = Array.isArray(brand)
@@ -31,14 +34,13 @@ async function Home({ searchParams }: PageProps) {
 
     const availableBrands = await getBrands()
 
-    const { rating } = await searchParams
-
   let products = await getProducts(
     category, 
     selectedBrands,
     minPrice,
     maxPrice,
-    rating
+    rating,
+    stock
   );
 
   if (search) {
