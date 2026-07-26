@@ -51,7 +51,7 @@ async function Home({ searchParams }: PageProps) {
     );
   }
   return (
-    <main className="mx-auto max-w-7xl px-6 py-10">
+    <main className="mx-auto max-w-screen-2xl px-6 py-10">
       {category && (
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
           <Link
