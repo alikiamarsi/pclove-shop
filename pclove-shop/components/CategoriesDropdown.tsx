@@ -1,19 +1,12 @@
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
-import { getProducts } from "@/services/product.service"
+import { getCategories } from "@/services/product.service"
 
-export async function getCategories() {
-    const products = await getProducts();
-
-    return [
-        ...new Set(products.map((product) => product.category))
-    ].sort();
-}
 async function CategoriesDropdown() {
     const categories = await getCategories();
   return (
     <div className="group relative">
-        <button className="flex items-center gap-1 font-medium transition hover: text-blue-600">
+        <button className="flex items-center gap-1 font-medium transition hover:text-blue-600">
             Categories
             <ChevronDown
             size={18}

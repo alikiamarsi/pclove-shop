@@ -1,6 +1,6 @@
 import FilterSidebar from "@/components/filters/FilterSidebar";
 import ProductGrid from "@/components/ProductGrid";
-import { getBrands, getProducts } from "@/services/product.service";
+import { getBrands, getCategories, getProducts } from "@/services/product.service";
 import Link from "next/link";
 
 type PageProps = {
@@ -33,6 +33,8 @@ async function Home({ searchParams }: PageProps) {
     : [];
 
     const availableBrands = await getBrands()
+
+    const availableCategories = await getCategories();
 
   let products = await getProducts(
     category, 
@@ -67,7 +69,10 @@ async function Home({ searchParams }: PageProps) {
       )}
       <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
      <div className="flex gap-8">
-      <FilterSidebar brands={availableBrands} />
+      <FilterSidebar 
+        brands={availableBrands} 
+        categories={availableCategories}
+      />
       <div className="flex-1">
          <ProductGrid products={products} />
       </div>

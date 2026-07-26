@@ -74,3 +74,11 @@ export async function getBrands() {
 
   return [...new Set(products.map((product) => product.brand))].sort();
 }
+
+export async function getCategories() {
+  const products = await getProducts();
+
+  return [
+    ...new Set(products.map((product) => product.category))
+  ].sort();
+}
