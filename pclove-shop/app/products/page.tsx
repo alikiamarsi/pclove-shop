@@ -1,5 +1,5 @@
 import FilterSidebar from "@/components/filters/FilterSidebar";
-import ProductGrid from "@/components/ProductGrid";
+import ProductList from "@/components/ProductList";
 import { getBrands, getCategories, getProducts } from "@/services/product.service";
 import Link from "next/link";
 
@@ -32,18 +32,32 @@ async function Home({ searchParams }: PageProps) {
     ? [brand] 
     : [];
 
+    const query = new URLSearchParams();
+
+    if(category) query.set("category", category);
+    if(rating) query.set("rating", rating);
+    if(stock) query.set("stock", stock);
+    if(minPrice) query.set("minPrice", minPrice);
+    if(maxPrice) query.set("maxPrice", maxPrice);
+    if(search) query.set("search", search);
+
+    selectedBrands.forEach((brand) => {
+      query.append("brand", brand)
+    })
+
+
     const availableBrands = await getBrands()
 
     const availableCategories = await getCategories();
 
-  let products = await getProducts(
+  let products = await getProducts({
     category, 
-    selectedBrands,
+    brands: selectedBrands,
     minPrice,
     maxPrice,
     rating,
     stock
-  );
+});
 
   if (search) {
     products = products.filter((product) =>
@@ -74,7 +88,11 @@ async function Home({ searchParams }: PageProps) {
         categories={availableCategories}
       />
       <div className="flex-1">
-         <ProductGrid products={products} />
+         <ProductList 
+         key={query.toString()}
+         initialProducts={products}
+         query = {query.toString()}
+         />
       </div>
      </div>
     </main>

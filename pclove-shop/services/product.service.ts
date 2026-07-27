@@ -1,19 +1,31 @@
 import API_URL from "@/lib/api";
 import { Product } from "@/types/product";
 
-export async function getProducts(
-  category?: string,
-  brands: string[] = [],
-  minPrice?: string,
-  maxPrice?: string,
-  rating?: string,
-  stock?: string
-): Promise<Product[]> {
-  const url = category
-    ? `${API_URL}/products?category=${encodeURIComponent(category)}`
-    : `${API_URL}/products`;
+type GetProductsParams = {
+  page?: number;
+  limit?: number;
+  category?: string;
+  brands?: string[];
+  minPrice?: string;
+  maxPrice?: string;
+  rating?: string;
+  stock?: string;
+};
 
-  const res = await fetch(url, {
+export async function getProducts({
+  page = 1,
+  limit = 12,
+  category,
+  brands = [],
+  minPrice,
+  maxPrice,
+  rating,
+  stock,
+}
+: GetProductsParams = {}): Promise<Product[]> {
+  const url = new URL(`${API_URL}/products`);
+
+  const res = await fetch(url.toString(), {
     cache: "no-store",
   });
 
@@ -21,7 +33,15 @@ export async function getProducts(
     throw new Error("Failed to fetch products");
   }
 
-  let products: Product[] = await res.json();
+ const result = await res.json();
+
+  let products: Product[] = result.data ?? result;
+
+  if(category) {
+  products = products.filter(
+    (product) => product.category === category
+  );
+}
 
   if(brands.length > 0) {
     products = products.filter((product) =>
@@ -52,6 +72,11 @@ export async function getProducts(
     )
   }
 
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+  products = products.slice(start, end)
+
   return products
 }
 
@@ -70,13 +95,17 @@ export async function getproduct(
 }
 
 export async function getBrands() {
-  const products = await getProducts();
+  const products = await getProducts({
+    limit: 1000
+  });
 
   return [...new Set(products.map((product) => product.brand))].sort();
 }
 
 export async function getCategories() {
-  const products = await getProducts();
+  const products = await getProducts({
+    limit: 1000
+  });
 
   return [
     ...new Set(products.map((product) => product.category))
