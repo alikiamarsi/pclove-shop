@@ -16,7 +16,7 @@ async function CategoriesDropdown() {
 
         <div className="invisible absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border bg-white py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
             <Link
-                href="/"
+                href="/products"
                 className="block px-4 py-2 font-medium hover:bg-blue-50 hover:text-blue-600"
             >
                 All Products
