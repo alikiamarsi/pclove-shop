@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Trash2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
-import AddToCartButton from "@/components/AddToCartButton";
+import AddToCartButton from "@/components/Product/AddToCartButton";
 
 function WishlistPage() {
   const dispatch = useAppDispatch();

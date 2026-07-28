@@ -1,6 +1,6 @@
 import CategoriesSection from "@/components/home/CategoriesSection";
 import Hero from "@/components/home/Hero";
-import FeaturedProducts from "@/components/FeaturedProducts";
+import FeaturedProducts from "@/components/Product/FeaturedProducts";
 import { getProducts } from "@/services/product.service";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import NewsletterSection from "@/components/home/NewsletterSection";

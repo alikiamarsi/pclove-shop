@@ -27,14 +27,25 @@ function WishlistButton({product}: Props) {
             e.stopPropagation();
             dispatch(toggleWishlist(product))
         }}
-        className="absolute right-3 top-3 z-10 rounded-full border bg-white p-2 transition hover:bg-red-50"
+          className="
+            group/wishlist
+            absolute right-3 top-3 z-10
+            flex h-10 w-10 items-center justify-center
+            rounded-full
+            bg-white/90
+            shadow-md
+            backdrop-blur-sm
+            transition-all duration-200
+          hover:bg-red-50
+            hover:shadow-lg
+            "
     >
         <Heart 
             size={22}
             className={
                 isInWishlist
                 ? "fill-red-500 text-red-500"
-                : "text-gray-500"
+                : "text-gray-500 transition-colors group-hover/wishlist:text-red-500"
             }
         />
 

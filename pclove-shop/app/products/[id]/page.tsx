@@ -1,5 +1,5 @@
-import AddToCartButton from "@/components/AddToCartButton"
-import WishlistButton from "@/components/WishlistButton"
+import AddToCartButton from "@/components/Product/AddToCartButton"
+import WishlistButton from "@/components/Product/WishlistButton"
 import { getproduct } from "@/services/product.service"
 import Image from "next/image"
 import Link from "next/link"

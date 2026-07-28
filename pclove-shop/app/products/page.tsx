@@ -1,5 +1,5 @@
 import FilterSidebar from "@/components/filters/FilterSidebar";
-import ProductList from "@/components/ProductList";
+import ProductList from "@/components/Product/ProductList";
 import { getBrands, getCategories, getProducts } from "@/services/product.service";
 import Link from "next/link";
 

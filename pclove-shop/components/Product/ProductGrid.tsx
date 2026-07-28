@@ -3,7 +3,7 @@
 import { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
 import { useState } from "react";
-import ProductPreview from "./ProductPreview";
+import ProductPreview from "../ProductPreview";
 import { useFloating ,offset, flip, shift } from "@floating-ui/react";
 type Props = {
   products: Product[];

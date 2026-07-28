@@ -3,6 +3,7 @@ import { Product } from "@/types/product";
 import Link from "next/link";
 import AddToCartButton from "./AddToCartButton";
 import WishlistButton from "./WishlistButton";
+import { Eye } from "lucide-react";
 
 
 type Props = {
