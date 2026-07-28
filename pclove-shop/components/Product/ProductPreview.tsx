@@ -1,18 +1,28 @@
 import { Product } from "@/types/product"
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 
 type Props = {
   product: Product;
-  floatingStyles: CSSProperties
-  floatingRef: (node: HTMLElement | null) => void
+  floatingStyles: CSSProperties;
+  floatingRef: (node: HTMLElement | null) => void;
+  onClose: () => void;
+  floatingProps: React.HTMLAttributes<HTMLDivElement>;
 };
 
-function ProductPreview({ product,floatingStyles, floatingRef }: Props) {
+function ProductPreview({ product,floatingStyles, floatingRef, onClose, floatingProps }: Props) {
   return (
     <div 
+    {...floatingProps}
     ref={floatingRef}
     style={floatingStyles}
-    className="z-50 w-80 rounded-xl border bg-white p-5 shadow-xl">
+    className="relative z-50 w-80 rounded-xl border bg-white p-5 shadow-xl">
+      <button 
+        onClick={onClose}
+        className="absolute right-3 top-3 text-gray-500 hover:text-red-500"
+      >
+        ✕
+      </button>
+
       <h2 className="text-xl font-bold">
         {product.title}
       </h2>
@@ -31,7 +41,7 @@ function ProductPreview({ product,floatingStyles, floatingRef }: Props) {
         </span>
       </div>
 
-      <p className="mt-5 text-3xl font-bold to-blue-600">
+      <p className="mt-5 text-3xl font-bold text-blue-600">
         ${product.price.toFixed(2)}
       </p>
 

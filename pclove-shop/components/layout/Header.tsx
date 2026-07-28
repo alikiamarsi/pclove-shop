@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeaderClient from "./HeaderClient";
-import CategoriesDropdown from "../CategoriesDropdown";
+import CategoriesDropdown from "../categories/CategoriesDropdown";
 
 function Header() {
   return (

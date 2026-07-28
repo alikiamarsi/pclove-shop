@@ -3,20 +3,17 @@ import { Product } from "@/types/product";
 import Link from "next/link";
 import AddToCartButton from "./AddToCartButton";
 import WishlistButton from "./WishlistButton";
-import { Eye } from "lucide-react";
+import QuickViewButton from "./QuickViewButton";
 
 
 type Props = {
   product: Product;
-  onHover?: (element: HTMLElement) => void
-  onLeave?: () => void;
+  onQuickView: (product: Product, element: HTMLElement) => void
 };
 
-function ProductCard({ product, onHover, onLeave }: Props) {
+function ProductCard({ product, onQuickView}: Props) {
   return (
     <div 
-    onMouseEnter={(e) => onHover?.(e.currentTarget)}
-    onMouseLeave={onLeave}
     className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
       <Link 
       href={`/products/${product.id}`}
@@ -26,6 +23,11 @@ function ProductCard({ product, onHover, onLeave }: Props) {
       <div className="relative h-56 w-full">
 
         <WishlistButton product={product} />
+
+        <QuickViewButton 
+          onClick={onQuickView}
+          product={product}
+        />
 
         <Image
           src={product.image}
