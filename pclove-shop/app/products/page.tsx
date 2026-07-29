@@ -1,5 +1,6 @@
 import FilterSidebar from "@/components/filters/FilterSidebar";
 import ProductList from "@/components/Product/ProductList";
+import ProductSort from "@/components/Product/ProductSort";
 import { getBrands, getCategories, getProducts } from "@/services/product.service";
 import Link from "next/link";
 
@@ -11,7 +12,8 @@ type PageProps = {
     minPrice?: string;
     maxPrice?: string;
     rating?: string;
-    stock?: string
+    stock?: string;
+    sort?: string
   }>;
 };
 
@@ -23,7 +25,8 @@ async function Home({ searchParams }: PageProps) {
     minPrice,
     maxPrice,
     rating,
-    stock
+    stock,
+    sort
    } = await searchParams;
 
   const selectedBrands = Array.isArray(brand)
@@ -40,6 +43,7 @@ async function Home({ searchParams }: PageProps) {
     if(minPrice) query.set("minPrice", minPrice);
     if(maxPrice) query.set("maxPrice", maxPrice);
     if(search) query.set("search", search);
+    if(sort) query.set("sort", sort)
 
     selectedBrands.forEach((brand) => {
       query.append("brand", brand)
@@ -56,7 +60,8 @@ async function Home({ searchParams }: PageProps) {
     minPrice,
     maxPrice,
     rating,
-    stock
+    stock,
+    sort
 });
 
   let products = initialProducts
@@ -83,12 +88,18 @@ async function Home({ searchParams }: PageProps) {
           </span>
         </div>
       )}
-      <h1 className="mb-8 text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-3xl font-bold">{search ? `Search:${search}` : category || "Products"}</h1>
+
+        <ProductSort />
+      </div>
+
      <div className="flex gap-8">
       <FilterSidebar 
         brands={availableBrands} 
         categories={availableCategories}
       />
+
       <div className="flex-1">
          <ProductList 
          key={query.toString()}

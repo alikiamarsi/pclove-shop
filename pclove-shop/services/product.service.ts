@@ -10,6 +10,7 @@ type GetProductsParams = {
   maxPrice?: string;
   rating?: string;
   stock?: string;
+  sort?: string;
 };
 
 export async function getProducts({
@@ -21,6 +22,7 @@ export async function getProducts({
   maxPrice,
   rating,
   stock,
+  sort,
 }
 : GetProductsParams = {}): Promise<{data: Product[]; total: number}> {
   const url = new URL(`${API_URL}/products`);
@@ -70,6 +72,18 @@ export async function getProducts({
     products = products.filter(
       (product) => product.stock > 0
     )
+  }
+
+  if(sort === "price-asc") {
+    products.sort((a, b) => a.price - b.price);
+  }
+
+  if(sort === "price-desc") {
+    products.sort((a, b) => b.price - a.price);
+  }
+
+  if(sort === "rating-desc") {
+    products.sort((a, b) => b.rating - a.rating)
   }
 
   const total = products.length
