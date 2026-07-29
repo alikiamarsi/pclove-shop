@@ -6,13 +6,17 @@ import ProductGrid from "./ProductGrid";
 
 type Props = {
   initialProducts: Product[];
-  query: string
+  query: string;
+  total:number;
 };
 
-function ProductList({ initialProducts, query }: Props) {
+function ProductList({ initialProducts, query, total }: Props) {
   const [products, setProducts] = useState(initialProducts);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(
+    initialProducts.length < total
+  );
 
   async function loadMore() {
     setLoading(true);
@@ -23,12 +27,18 @@ function ProductList({ initialProducts, query }: Props) {
       `/api/products?page=${nextPage}&limit=12&${query}`
     );
 
-    const data = await res.json();
+    const result = await res.json();
 
-    setProducts((prev) => [
-      ...prev,
-      ...data,
-    ]);
+    const newProducts = result.data;
+
+
+    setProducts((prev) => {
+      const updatetdProducts = [...prev, ...newProducts];
+
+      setHasMore(updatetdProducts.length < result.total);
+
+      return updatetdProducts;
+    })
 
     setPage(nextPage);
     setLoading(false);
@@ -38,13 +48,15 @@ function ProductList({ initialProducts, query }: Props) {
     <>
       <ProductGrid products={products} />
 
-      <button
+      {hasMore && (
+        <button
         onClick={loadMore}
         disabled={loading}
         className="mt-8 rounded-lg bg-blue-600 px-6 py-2 text-white"
       >
         {loading ? "Loading..." : "Load More"}
       </button>
+    )}
     </>
   );
 }

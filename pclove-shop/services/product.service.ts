@@ -22,7 +22,7 @@ export async function getProducts({
   rating,
   stock,
 }
-: GetProductsParams = {}): Promise<Product[]> {
+: GetProductsParams = {}): Promise<{data: Product[]; total: number}> {
   const url = new URL(`${API_URL}/products`);
 
   const res = await fetch(url.toString(), {
@@ -72,12 +72,17 @@ export async function getProducts({
     )
   }
 
+  const total = products.length
+
   const start = (page - 1) * limit;
   const end = start + limit;
 
   products = products.slice(start, end)
 
-  return products
+  return {
+    data: products,
+    total,
+  }
 }
 
 export async function getproduct(
@@ -95,7 +100,7 @@ export async function getproduct(
 }
 
 export async function getBrands() {
-  const products = await getProducts({
+  const {data: products} = await getProducts({
     limit: 1000
   });
 
@@ -103,7 +108,7 @@ export async function getBrands() {
 }
 
 export async function getCategories() {
-  const products = await getProducts({
+  const {data: products} = await getProducts({
     limit: 1000
   });
 

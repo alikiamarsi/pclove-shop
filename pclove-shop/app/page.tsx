@@ -6,7 +6,7 @@ import WhyChooseUs from "@/components/home/WhyChooseUs";
 import NewsletterSection from "@/components/home/NewsletterSection";
 
 async function Home() {
-  const products = await getProducts();
+  const {data: products} = await getProducts();
 
   const featuredProducts = products.slice(0, 4);
 

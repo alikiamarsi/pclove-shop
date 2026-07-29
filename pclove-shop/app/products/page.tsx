@@ -50,7 +50,7 @@ async function Home({ searchParams }: PageProps) {
 
     const availableCategories = await getCategories();
 
-  let products = await getProducts({
+    const {data: initialProducts, total} = await getProducts({
     category, 
     brands: selectedBrands,
     minPrice,
@@ -58,6 +58,8 @@ async function Home({ searchParams }: PageProps) {
     rating,
     stock
 });
+
+  let products = initialProducts
 
   if (search) {
     products = products.filter((product) =>
@@ -90,6 +92,7 @@ async function Home({ searchParams }: PageProps) {
       <div className="flex-1">
          <ProductList 
          key={query.toString()}
+         total={total}
          initialProducts={products}
          query = {query.toString()}
          />
