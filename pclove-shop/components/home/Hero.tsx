@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroScene from "./HeroScene";
 
 function Hero() {
   return (
-    <section className="bg-linear-to-br from-slate-900 via-slate-800 to-blue-900">
-      <div className="mx-auto flex min-h-150 max-w-7xl items-center justify-between px-6 py-20">
+    <section className="relative overflow-hidden bg-linear-to-br from-slate-900 via-slate-800 to-blue-900">
+      <div className="absolute inset-0 z-0">
+        <HeroScene />
+      </div>
+      <div className="relative z-10 mx-auto flex min-h-150 max-w-7xl items-center justify-between px-6 py-20">
 
 
         <div className="max-w-xl">
