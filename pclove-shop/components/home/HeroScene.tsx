@@ -3,8 +3,9 @@
 import { Canvas } from "@react-three/fiber"
 import Lights from "./scene/Lights"
 import * as THREE from "three"
-import Particles from "./scene/Particles"
+import Particles from "./scene/EnergyParticles"
 import PCCase from "./scene/PCCase"
+import { Bloom, EffectComposer } from "@react-three/postprocessing"
 
 
 function HeroScene() {
@@ -22,6 +23,14 @@ function HeroScene() {
             <Particles />
             
             <PCCase />
+
+            <EffectComposer>
+                <Bloom
+                    intensity={1.2}
+                    luminanceThreshold={0.25}
+                    raduis={1}
+                />
+            </EffectComposer>
         </Canvas>
     </div>
   )
