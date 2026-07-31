@@ -16,11 +16,14 @@ function FloatingCube() {
         meshRef.current.rotation.y = time * 0.5;
         meshRef.current.rotation.x = time * 0.2;
 
-        meshRef.current.position.y = Math.sin(time) * 0.3;
+        meshRef.current.position.y = 0.5 + Math.sin(time) * 0.3;
     });
 
     return (
-        <mesh ref={meshRef}>
+        <mesh 
+            ref={meshRef}
+            scale={1.8}
+        >
             <boxGeometry />
             <meshStandardMaterial color="limegreen" />
         </mesh>

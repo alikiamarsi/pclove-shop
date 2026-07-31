@@ -1,37 +1,34 @@
-import Image from "next/image";
 import Link from "next/link";
 import HeroScene from "./HeroScene";
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-slate-900 via-slate-800 to-blue-900">
-      <div className="absolute inset-0 z-0">
-        <HeroScene />
-      </div>
-      <div className="relative z-10 mx-auto flex min-h-150 max-w-7xl items-center justify-between px-6 py-20">
+    <section className="relative h-screen overflow-hidden bg-black ">
+      <HeroScene />
+      <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center">
 
 
-        <div className="max-w-xl">
-          <p className="mb-4 font-semibold uppercase tracking-widest text-blue-400">
+        <div>
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-green-400">
             Premium Gaming Hardware
           </p>
 
-          <h1 className="text-5xl font-extrabold leading-tight text-white">
+          <h1 className="text-5xl font-bold text-white">
             Build Your Dream
             <br />
             Gaming Setup
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+            <p className="mx-auto mt-6 max-w-xl text-gray-400">
             Discover premium PC components,
             gaming accessories and high-performance hardware
             for professionals and gamers.
           </p>
-
-          <div className="mt-10 flex gap-4">
-            <Link
+          
+            <div className="mt-8 flex justify-center gap-4">
+              <Link
               href="/products"
-              className="rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700"
+              className="rounded-lg bg-green-500 px-8 py-4 font-semibold text-black"
             >
               Shop Now
             </Link>
@@ -41,24 +38,9 @@ function Hero() {
               className="rounded-lg border border-white/20 px-8 py-4 font-semibold text-white transition hover:bg-white/10"
             >
               Explore Categories
-            </Link>
-          </div>
+            </Link> 
+            </div>  
         </div>
-
-
-        <div className="relative max-auto mt-12 h-72 w-72 lg:mt-0 lg:h-125 lg:w-125
-        ">
-          <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-3xl" />
-
-          <Image 
-            src="/images/game-setup.png"
-            alt="Gaming setup"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
-
       </div>
     </section>
   );
