@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section className="relative h-screen overflow-hidden bg-black ">
       <HeroScene />
-      <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center">
+      <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center pointer-events-none">
 
 
         <div>

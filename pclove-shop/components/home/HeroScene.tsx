@@ -14,6 +14,8 @@ function HeroScene() {
         <Canvas 
             camera={{position: [0, 0, 6]}}
             gl={{alpha: true}}
+            style={{pointerEvents: "auto"}}
+            dpr={[1, 1.5]}
             onCreated={({ scene }) => {
                 scene.fog = new THREE.Fog("#050505", 5, 15)
             }}
@@ -26,9 +28,9 @@ function HeroScene() {
 
             <EffectComposer>
                 <Bloom
-                    intensity={1.2}
-                    luminanceThreshold={0.25}
-                    raduis={1}
+                    intensity={0.35}
+                    luminanceThreshold={0.85}
+                    raduis={0.25}
                 />
             </EffectComposer>
         </Canvas>
