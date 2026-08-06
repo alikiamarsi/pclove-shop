@@ -1,5 +1,6 @@
 "use client"
 
+import { useScrollStore } from "@/scrollStore";
 import { PointMaterial, Points } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
@@ -21,6 +22,10 @@ function EnergyRing({
     speed,
     heightOffset = 0,
 }: Props) {
+
+    const progress = useScrollStore(
+        (state) => state.progress
+    )
 
     const groupRef = useRef<Group>(null);
 
@@ -72,20 +77,14 @@ function EnergyRing({
 
         const mouseX = state.pointer.x; 
         const mouseY = state.pointer.y; 
-        
-        console.log(state.pointer.x, state.pointer.y)
-
-        const interaction = Math.sqrt(mouseX ** 2 + mouseY ** 2)
 
         const time = state.clock.getElapsedTime();
 
-        const dynamicSpeed = speed + interaction * 8;
+        groupRef.current.rotation.y += delta * speed;
 
-        groupRef.current.rotation.y += delta * dynamicSpeed;
+        groupRef.current.rotation.x =+ (mouseY * 0.08 - groupRef.current.rotation.x) * 0.3;
 
-        const scale = 1 + interaction * 0.2;
-
-        groupRef.current.scale.setScalar(scale)
+        groupRef.current.rotation.z += (-mouseX * 0.08 - groupRef.current.rotation.z) * 0.3;
 
         const positions = pointsRef.current.geometry.attributes.position.array;
 
@@ -115,7 +114,7 @@ function EnergyRing({
                 color="#00ff66"
                 size={0.045}
                 transparent
-                opacity={0.7}
+                opacity={Math.max(0, 0.7 - progress * 0.7)}
             />
         </Points>
     </group>

@@ -6,6 +6,9 @@ import * as THREE from "three"
 import Particles from "./scene/EnergyParticles"
 import PCCase from "./scene/PCCase"
 import { Bloom, EffectComposer } from "@react-three/postprocessing"
+import { ScrollControls } from "@react-three/drei"
+import ScrollController from "./scene/ScrollController"
+import CameraController from "./scene/CameraController"
 
 
 function HeroScene() {
@@ -20,19 +23,25 @@ function HeroScene() {
                 scene.fog = new THREE.Fog("#050505", 5, 15)
             }}
         >
-            <Lights />
+            <ScrollControls pages={2} damping={0.2}>
+                <Lights />
 
-            <Particles />
+                <ScrollController />
+
+                <CameraController />
+
+                <Particles />
             
-            <PCCase />
+                <PCCase />
 
-            <EffectComposer>
+                <EffectComposer>
                 <Bloom
                     intensity={0.35}
                     luminanceThreshold={0.85}
                     raduis={0.25}
                 />
-            </EffectComposer>
+                </EffectComposer>
+            </ScrollControls>
         </Canvas>
     </div>
   )
