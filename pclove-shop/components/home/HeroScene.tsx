@@ -9,6 +9,7 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing"
 import { ScrollControls } from "@react-three/drei"
 import ScrollController from "./scene/ScrollController"
 import CameraController from "./scene/CameraController"
+import CategoryModels from "./categories/CategoryModels"
 
 
 function HeroScene() {
@@ -33,6 +34,8 @@ function HeroScene() {
                 <Particles />
             
                 <PCCase />
+
+                <CategoryModels />
 
                 <EffectComposer>
                 <Bloom

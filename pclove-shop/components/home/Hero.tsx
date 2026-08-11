@@ -1,13 +1,10 @@
 import Link from "next/link";
 import HeroScene from "./HeroScene";
-import CategoryScene from "./categories/CategoryScene";
 
 function Hero() {
   return (
     <section className="relative h-screen overflow-hidden bg-black ">
       <HeroScene />
-
-      <CategoryScene />
       
       <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center pointer-events-none">
 
