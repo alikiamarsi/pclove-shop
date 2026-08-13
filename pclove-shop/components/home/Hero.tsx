@@ -1,12 +1,19 @@
+"use client"
+
 import Link from "next/link";
 import HeroScene from "./HeroScene";
+import { useScrollStore } from "@/scrollStore";
 
 function Hero() {
+
+  const phase = useScrollStore((state) => state.phase);
+
   return (
     <section className="relative h-screen overflow-hidden bg-black ">
       <HeroScene />
       
-      <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center pointer-events-none">
+      {phase !== "categories" && (
+        <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center pointer-events-none">
 
 
         <div>
@@ -43,6 +50,7 @@ function Hero() {
             </div>  
         </div>
       </div>
+      )}
     </section>
   );
 }
