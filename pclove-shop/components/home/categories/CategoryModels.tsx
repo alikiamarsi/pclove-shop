@@ -29,10 +29,11 @@ function CategoryModels() {
 
   if (phase !== "categories") return null;
   return (
-    <group scale={groupScale}>
+        <group scale={groupScale}>
       
       <CategoryModel
         model={gpu.scene}
+        name="GPU"
         category="Graphics Cards"
         position={[-6, 3, 0]}
         rotation={[6, Math.PI * 0.1, 4]}
@@ -42,6 +43,7 @@ function CategoryModels() {
 
       <CategoryModel
         model={motherboard.scene}
+        name="Motherboard"
         category="Motherboards"
         position={[0.5, 5, 0]}
         rotation={[5.8, Math.PI * 0.1, 0.5]}
@@ -51,6 +53,7 @@ function CategoryModels() {
 
       <CategoryModel
         model={cpu.scene}
+        name="CPU"
         category="CPU"
         position={[0, -1.5, 0]}
         rotation={[0.45, Math.PI * 0.7, 6.9]}
@@ -60,6 +63,7 @@ function CategoryModels() {
 
       <CategoryModel
         model={ram.scene}
+        name="RAM"
         category="RAM"
         position={[4.5, 2.8, 0]}
         rotation={[1, Math.PI * 0.2, 0]}
@@ -69,6 +73,7 @@ function CategoryModels() {
 
       <CategoryModel
         model={cooling.scene}
+        name="Cooling"
         category="Cooling"
         position={[-5.5, -1.8, 0]}
         rotation={[1.6, Math.PI * 0.2, 2]}
@@ -78,6 +83,7 @@ function CategoryModels() {
 
       <CategoryModel
         model={accessories.scene}
+        name="Keyboards"
         category="Keyboards"
         position={[5, -1.5, 0]}
         rotation={[0.35, Math.PI * 0.2, 0.15]}
@@ -88,4 +94,4 @@ function CategoryModels() {
   );
 }
 
-export default CategoryModels;
+export default CategoryModels;  

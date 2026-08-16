@@ -11,19 +11,24 @@ export type Category =
     | "RAM"
     | "Cooling"
     | "Motherboard"
-    | "Accessories"
+    | "Keyboards"
 
 export type HoveredCategory = Category | null;
+
+export type HoveredCategoryData = {
+    name: Category;
+    position: [number, number, number];
+} | null;
 
 type ScrollStore = {
     progress: number;
     phase: HeroPhase;
 
-    hoveredCategory: HoveredCategory;
+    hoveredCategory: HoveredCategoryData;
 
     setProgress: (value: number) => void;
 
-    setHoveredCategory: (value: HoveredCategory) => void;
+    setHoveredCategory: (value: HoveredCategoryData) => void;
 
     selectedCategory: HoveredCategory;
 
@@ -42,7 +47,7 @@ export const useScrollStore = create<ScrollStore>((set) => ({
     setProgress: (value) => {
         let phase: HeroPhase = "intro";
 
-        if(value >= 0.75) {
+        if(value >= 0.98) {
             phase = "categories";
         } else if (value >= 0.35) {
             phase = "zoom";
