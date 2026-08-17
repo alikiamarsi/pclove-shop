@@ -1,6 +1,7 @@
 import AddToCartButton from "@/components/Product/AddToCartButton"
 import WishlistButton from "@/components/Product/WishlistButton"
-import { getproduct } from "@/services/product.service"
+import { getproduct} from "@/services/product.service"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -11,6 +12,18 @@ interface PageProps {
     }>
 }
 
+export async function generateMetadata({
+  params,
+}: PageProps) : Promise<Metadata> {
+  const {id} = await params;
+
+  const product = await getproduct(id);
+
+  return {
+    title: product.title,
+    description: product.description
+  }
+}
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
