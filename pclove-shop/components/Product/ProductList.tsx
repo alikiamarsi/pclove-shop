@@ -19,29 +19,38 @@ function ProductList({ initialProducts, query, total }: Props) {
   );
 
   async function loadMore() {
-    setLoading(true);
+    if(loading) return;
 
+    setLoading(true);
+    
     const nextPage = page + 1;
 
-    const res = await fetch(
-      `/api/products?page=${nextPage}&limit=12&${query}`
-    );
+    try {
+      const res = await fetch(
+        `/api/products?page=${nextPage}&limit=12&${query}`
+      );
 
-    const result = await res.json();
+      if(!res.ok) {
+        throw new Error("Failed to load more products");
+      }
+      const result = await res.json();
 
-    const newProducts = result.data;
+      const newProducts = result.data;
 
 
-    setProducts((prev) => {
-      const updatetdProducts = [...prev, ...newProducts];
+      setProducts((prev) => {
+        const updatedProducts = [...prev, ...newProducts];
 
-      setHasMore(updatetdProducts.length < result.total);
+        setHasMore(updatedProducts.length < result.total);
 
-      return updatetdProducts;
-    })
-
-    setPage(nextPage);
-    setLoading(false);
+      return updatedProducts;
+    });
+      setPage(nextPage);
+    } catch (error) {
+      console.error("Failed to load more products:", error);
+    } finally {
+      setLoading(false);
+    }  
   }
 
   return (
