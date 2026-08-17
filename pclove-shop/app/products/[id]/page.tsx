@@ -4,6 +4,7 @@ import { getproduct} from "@/services/product.service"
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 
 interface PageProps {
@@ -27,7 +28,15 @@ export async function generateMetadata({
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
-    const product = await getproduct(id);
+
+    let product;
+
+    try {
+      product = await getproduct(id);
+    } catch {
+      notFound();
+    }
+    
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
       <div className="mb-8 flex items-center gap-2 text-sm text-gray-500">
