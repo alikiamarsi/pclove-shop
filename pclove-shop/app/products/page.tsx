@@ -61,16 +61,9 @@ async function Home({ searchParams }: PageProps) {
     maxPrice,
     rating,
     stock,
-    sort
+    sort,
+    search,
 });
-
-  let products = initialProducts
-
-  if (search) {
-    products = products.filter((product) =>
-      product.title.toLowerCase().includes(search.toLowerCase())
-    );
-  }
   return (
     <main className="mx-auto max-w-screen-2xl px-6 py-10">
       {category && (
@@ -104,7 +97,7 @@ async function Home({ searchParams }: PageProps) {
          <ProductList 
          key={query.toString()}
          total={total}
-         initialProducts={products}
+         initialProducts={initialProducts}
          query = {query.toString()}
          />
       </div>
