@@ -13,6 +13,7 @@ export async function GET(request: Request) {
     const stock = searchParams.get("stock") || undefined;
     const minPrice = searchParams.get("minPrice") || undefined;
     const maxPrice = searchParams.get("maxPrice") || undefined;
+    const sort = searchParams.get("sort") || undefined;
     const brands = searchParams.getAll("brand");
 
     const products = await getProducts({
@@ -23,7 +24,8 @@ export async function GET(request: Request) {
         stock,
         minPrice,
         maxPrice,
-        brands
+        brands,
+        sort,
     });
 
     return NextResponse.json(products)
