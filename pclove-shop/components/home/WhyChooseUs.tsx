@@ -1,4 +1,4 @@
-import { Truck, ShieldCheck, BadgeCheck, Headphones, Icon } from "lucide-react"
+import { Truck, ShieldCheck, BadgeCheck, Headphones } from "lucide-react"
 
 const features = [
   {
@@ -25,7 +25,7 @@ const features = [
 
 function WhyChooseUs() {
   return (
-    <section className="bg-slate50 py-20">
+    <section className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12 text-center">
                 <h2 className="text-3xl font-bold">
