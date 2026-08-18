@@ -1,5 +1,6 @@
 import API_URL from "@/lib/api";
 import { Product } from "@/types/product";
+import { cache } from "react";
 
 type GetProductsParams = {
   page?: number;
@@ -107,9 +108,9 @@ export async function getProducts({
   }
 }
 
-export async function getproduct(
+export const getproduct = cache(async (
     id: string,
-): Promise<Product> {
+): Promise<Product> => {
     const res = await fetch(`${API_URL}/products/${id}`, {
         cache: "no-store",
     });
@@ -119,7 +120,7 @@ export async function getproduct(
     }
 
     return res.json()
-}
+})
 
 export async function getBrands() {
   const {data: products} = await getProducts({
