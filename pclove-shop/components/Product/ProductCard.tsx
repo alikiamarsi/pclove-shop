@@ -4,6 +4,7 @@ import Link from "next/link";
 import AddToCartButton from "./AddToCartButton";
 import WishlistButton from "./WishlistButton";
 import QuickViewButton from "./QuickViewButton";
+import { memo } from "react";
 
 
 type Props = {
@@ -63,4 +64,4 @@ function ProductCard({ product, onQuickView}: Props) {
   );
 }
 
-export default ProductCard;
+export default memo(ProductCard);

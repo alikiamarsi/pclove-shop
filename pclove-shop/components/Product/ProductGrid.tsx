@@ -2,7 +2,7 @@
 
 import { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ProductPreview from "./ProductPreview";
 import { useFloating ,offset, flip, shift, useDismiss, useInteractions } from "@floating-ui/react";
 type Props = {
@@ -32,12 +32,15 @@ function ProductGrid({ products }: Props) {
       dismiss
     ])
 
-    function openPreview(product: Product, element:HTMLElement) {
+    const openPreview = useCallback(
+      (product: Product, element:HTMLElement) => {
       refs.setReference(element);
 
       setPreviewProduct(product);
       setIsPreviewOpen(true)
-    }
+    },
+    [refs]
+    );
 
     function closePreview() {
       setIsPreviewOpen(false);
