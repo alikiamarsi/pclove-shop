@@ -108,7 +108,7 @@ export async function getProducts({
   }
 }
 
-export async function fetchAllProducts(): Promise<Product[]> {
+const fetchAllProducts = cache(async (): Promise<Product[]> => {
   const res = await fetch(`${API_URL}/products`, {
     cache: "no-store",
   });
@@ -120,7 +120,7 @@ export async function fetchAllProducts(): Promise<Product[]> {
   const result = await res.json();
 
   return result.data ?? result
-}
+})
 
 export const getproduct = cache(async (
     id: string,
