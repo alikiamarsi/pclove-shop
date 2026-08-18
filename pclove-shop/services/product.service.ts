@@ -61,7 +61,7 @@ export async function getProducts({
 
   if(maxPrice) {
     products = products.filter(
-      (products) => products.price <= Number(maxPrice)
+      (product) => product.price <= Number(maxPrice)
     )
   }
 
@@ -79,7 +79,7 @@ export async function getProducts({
 
   if(search) {
     products = products.filter((product) => 
-    product.title.toLocaleLowerCase().includes(search.toLowerCase())
+    product.title.toLowerCase().includes(search.toLowerCase())
     );
   }
 
