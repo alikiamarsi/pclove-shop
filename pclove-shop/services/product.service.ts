@@ -108,6 +108,20 @@ export async function getProducts({
   }
 }
 
+export async function fetchAllProducts(): Promise<Product[]> {
+  const res = await fetch(`${API_URL}/products`, {
+    cache: "no-store",
+  });
+
+  if(!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const result = await res.json();
+
+  return result.data ?? result
+}
+
 export const getproduct = cache(async (
     id: string,
 ): Promise<Product> => {
@@ -123,19 +137,18 @@ export const getproduct = cache(async (
 })
 
 export async function getBrands() {
-  const {data: products} = await getProducts({
-    limit: 1000
-  });
+  const products = await fetchAllProducts();
 
-  return [...new Set(products.map((product) => product.brand))].sort();
+  return [...new Set(
+    products.map((product) => product.brand))
+  ].sort();
 }
 
 export async function getCategories() {
-  const {data: products} = await getProducts({
-    limit: 1000
-  });
+  const products = await fetchAllProducts();
 
   return [
-    ...new Set(products.map((product) => product.category))
+    ...new Set(
+      products.map((product) => product.category))
   ].sort();
 }
