@@ -49,21 +49,24 @@ async function Home({ searchParams }: PageProps) {
       query.append("brand", brand)
     })
 
+const [availableBrands, availableCategories, productsResult] =
+    await Promise.all([
+      getBrands(),
+      getCategories(),
+      getProducts({
+        category,
+        brands: selectedBrands,
+        minPrice,
+        maxPrice,
+        rating,
+        stock,
+        sort,
+        search,
+      }),
+    ]);
 
-    const availableBrands = await getBrands()
+    const {data: initialProducts, total} = productsResult;
 
-    const availableCategories = await getCategories();
-
-    const {data: initialProducts, total} = await getProducts({
-    category, 
-    brands: selectedBrands,
-    minPrice,
-    maxPrice,
-    rating,
-    stock,
-    sort,
-    search,
-});
   return (
     <main className="mx-auto max-w-screen-2xl px-6 py-10">
       {category && (
