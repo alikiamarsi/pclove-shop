@@ -31,7 +31,7 @@ function HeroScene() {
     fixed
     left-1/2
     top-1/5
-    z-[999999];
+    z-999999
     -translate-x-1/2
     -translate-y-1/2
 

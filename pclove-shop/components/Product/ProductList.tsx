@@ -37,15 +37,14 @@ function ProductList({ initialProducts, query, total }: Props) {
 
       const newProducts = result.data;
 
+      setProducts((prev) => [...prev, ...newProducts]);
 
-      setProducts((prev) => {
-        const updatedProducts = [...prev, ...newProducts];
+      setHasMore(
+        products.length + newProducts.length < result.total
+      );
 
-        setHasMore(updatedProducts.length < result.total);
-
-      return updatedProducts;
-    });
       setPage(nextPage);
+
     } catch (error) {
       console.error("Failed to load more products:", error);
     } finally {
