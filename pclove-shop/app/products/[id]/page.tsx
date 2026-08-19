@@ -18,13 +18,21 @@ export async function generateMetadata({
 }: PageProps) : Promise<Metadata> {
   const {id} = await params;
 
-  const product = await getproduct(id);
+  try {
+    const product = await getproduct(id);
 
-  return {
+    return {
     title: product.title,
     description: product.description
+    };
+  } catch {
+    notFound();
   }
 }
+
+  
+
+
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
