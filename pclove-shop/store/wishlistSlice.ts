@@ -1,7 +1,7 @@
 import { Product } from "@/types/product"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type WishlistState = {
+export type WishlistState = {
     items: Product[]
 };
 
@@ -26,9 +26,13 @@ const wishlistSlice = createSlice({
                 state.items.push(action.payload);
             }
         },
+
+        setWishlist: (_state, action: PayloadAction<WishlistState>) => {
+            return action.payload;
+        }
     },
 });
 
-export const {toggleWishlist} = wishlistSlice.actions;
+export const {toggleWishlist, setWishlist} = wishlistSlice.actions;
 
 export default wishlistSlice.reducer
