@@ -16,7 +16,7 @@ function Hero() {
         <div className="relative z-10 flex h-full items-end justify-center pb-20 text-center pointer-events-none">
 
 
-        <div>
+        <div className="pointer-events-auto">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-green-400">
             Premium Gaming Hardware
           </p>

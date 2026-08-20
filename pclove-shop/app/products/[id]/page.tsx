@@ -5,6 +5,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import type { Product } from "@/types/product"
 
 
 interface PageProps {
@@ -37,7 +38,7 @@ export async function generateMetadata({
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
 
-    let product;
+    let product: Product;
 
     try {
       product = await getproduct(id);
@@ -57,7 +58,7 @@ async function ProductDetails({params}: PageProps) {
         <span className="text-gray-300">/</span>
 
         <Link
-          href={`/?category=${encodeURIComponent(product.category)}`}
+          href={`/products?category=${encodeURIComponent(product.category)}`}
           className="transition hover:text-blue-600"
         >
           {product.category}

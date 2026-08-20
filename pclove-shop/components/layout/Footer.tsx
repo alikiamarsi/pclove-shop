@@ -43,7 +43,7 @@ function Footer() {
 
               <li>
                 <Link
-                  href="/products?category=Monitor"
+                  href="/products?category=Monitors"
                   className="transition hover:text-white"
                 >
                   Monitor
@@ -52,7 +52,7 @@ function Footer() {
 
               <li>
                 <Link 
-                  href="/products?category=Headset"
+                  href="/products?category=Headsets"
                   className="transition hover:text-white"
                 >
                   Headset

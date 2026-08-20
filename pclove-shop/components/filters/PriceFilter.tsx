@@ -52,7 +52,7 @@ function PriceFilter() {
                             params.delete("maxPrice");
                         }
 
-                        router.push(`products?${params.toString()}`,
+                        router.push(`/products?${params.toString()}`,
                     {
                                 scroll: false,
                             });

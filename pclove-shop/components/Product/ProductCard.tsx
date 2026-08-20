@@ -9,7 +9,7 @@ import { memo } from "react";
 
 type Props = {
   product: Product;
-  onQuickView: (product: Product, element: HTMLElement) => void
+  onQuickView?: (product: Product, element: HTMLElement) => void
 };
 
 function ProductCard({ product, onQuickView}: Props) {
@@ -25,10 +25,12 @@ function ProductCard({ product, onQuickView}: Props) {
 
         <WishlistButton product={product} />
 
+      {onQuickView && (
         <QuickViewButton 
           onClick={onQuickView}
           product={product}
         />
+      )}
 
         <Image
           src={product.image}

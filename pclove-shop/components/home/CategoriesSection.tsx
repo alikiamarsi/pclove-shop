@@ -11,11 +11,11 @@ const categories = [
     image: "/images/keyboard.webp"
   },
   {
-    name: "Monitor",
+    name: "Monitors",
     image: "/images/monitoro.webp"
   },
   {
-    name: "Headset",
+    name: "Headsets",
     image: "/images/headset.webp"
   },
 ];

@@ -24,25 +24,21 @@ function ProductList({ initialProducts, query, total }: Props) {
     setLoading(true);
     
     const nextPage = page + 1;
+    const queryString = query ? `&${query}` : "";
 
     try {
       const res = await fetch(
-        `/api/products?page=${nextPage}&limit=12&${query}`
+        `/api/products?page=${nextPage}&limit=12${queryString}`
       );
 
       if(!res.ok) {
         throw new Error("Failed to load more products");
       }
       const result = await res.json();
-
       const newProducts = result.data;
 
       setProducts((prev) => [...prev, ...newProducts]);
-
-      setHasMore(
-        products.length + newProducts.length < result.total
-      );
-
+      setHasMore(nextPage * 12 < result.total);
       setPage(nextPage);
 
     } catch (error) {
