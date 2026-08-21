@@ -4,10 +4,20 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
 import { Product } from "@/types/product";
 import { Heart } from "lucide-react";
+import { useSyncExternalStore } from "react";
 
 type Props = {
     product: Product
 };
+
+const subscribe = () => () => {};
+function useHasHydrated() {
+    return useSyncExternalStore(
+        subscribe,
+        () => true,
+        () => false,
+    );
+}
 
 function WishlistButton({product}: Props) {
     const dispatch = useAppDispatch();
@@ -16,9 +26,11 @@ function WishlistButton({product}: Props) {
         (state) => state.wishlist.items
     );
 
-    const isInWishlist = wishlistItems.some(
-        (item) => item.id === product.id
-    );
+    const hasHydrated = useHasHydrated();
+
+    const isInWishlist =
+    hasHydrated &&
+    wishlistItems.some((item) => item.id === product.id)
 
   return (
     <button
@@ -40,7 +52,7 @@ function WishlistButton({product}: Props) {
             hover:shadow-lg
             "
     >
-        <Heart 
+        <Heart
             size={22}
             className={
                 isInWishlist

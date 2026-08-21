@@ -1,12 +1,10 @@
 import AddToCartButton from "@/components/Product/AddToCartButton"
 import WishlistButton from "@/components/Product/WishlistButton"
-import { getproduct} from "@/services/product.service"
+import { getproduct, ProductNotFoundError} from "@/services/product.service"
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import type { Product } from "@/types/product"
-
 
 interface PageProps {
     params: Promise<{
@@ -14,37 +12,33 @@ interface PageProps {
     }>
 }
 
+async function getProductOrNotFound(id: string) {
+  try {
+    return await getproduct(id);
+  } catch (error) {
+    if(error instanceof ProductNotFoundError) {
+      notFound();
+    }
+    throw error;
+  }
+}
+
 export async function generateMetadata({
   params,
 }: PageProps) : Promise<Metadata> {
   const {id} = await params;
+  const product = await getProductOrNotFound(id);
 
-  try {
-    const product = await getproduct(id);
 
     return {
     title: product.title,
     description: product.description
     };
-  } catch {
-    notFound();
-  }
 }
-
-  
-
-
 
 async function ProductDetails({params}: PageProps) {
     const {id} = await params;
-
-    let product: Product;
-
-    try {
-      product = await getproduct(id);
-    } catch {
-      notFound();
-    }
+    const product = await getProductOrNotFound(id);
     
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">

@@ -15,6 +15,13 @@ type GetProductsParams = {
   search?: string;
 };
 
+export class ProductNotFoundError extends Error {
+  constructor(id: string) {
+    super(`Product with id "${id}" was not found`);
+    this.name = "ProductNotFoundError"
+  }
+}
+
 export async function getProducts({
   page = 1,
   limit = 12,
@@ -96,7 +103,6 @@ export async function getProducts({
   }
 
   const total = products.length
-
   const start = (page - 1) * limit;
   const end = start + limit;
 
@@ -129,8 +135,12 @@ export const getproduct = cache(async (
         cache: "no-store",
     });
 
+    if(res.status === 404) {
+        throw new ProductNotFoundError(id);
+    }
+
     if(!res.ok) {
-        throw new Error("Failed to fetch product");
+      throw new Error("Failed to fetch product")
     }
 
     return res.json()
