@@ -14,31 +14,29 @@ type Props = {
 
 function ProductCard({ product, onQuickView}: Props) {
   return (
-    <div 
-    className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
-      <Link 
-      href={`/products/${product.id}`}
-      className="flex flex-1 flex-col"
-    >
-
-      <div className="relative h-56 w-full">
+    <div className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
 
         <WishlistButton product={product} />
 
-      {onQuickView && (
-        <QuickViewButton 
-          onClick={onQuickView}
-          product={product}
+        {onQuickView && (
+          <QuickViewButton
+            onClick={onQuickView}
+            product={product}
         />
-      )}
+       )}
 
-        <Image
+        <Link
+          href={`/products/${product.id}`}
+          className="flex flex-1 flex-col"
+          >
+        <div className="relative h-56 w-full">
+          <Image
           src={product.image}
           alt={product.title}
           fill
           className="object-contain p-4"
-        />
-      </div>
+          />
+        </div>
 
       <div className="flex flex-1 flex-col p-4">
         <p className="text-sm text-gray-500">{product.brand}</p>

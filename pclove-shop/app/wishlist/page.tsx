@@ -31,7 +31,10 @@ function WishlistPage() {
               key={product.id}
               className="rounded-xl border bg-white p-4 shadow-sm"
             >
-              <Link href={`/products/${product.id}`}>
+              <Link
+                href={`/products/${product.id}`}
+                className="block"
+                >
                 <div className="relative h-48 w-full">
                   <Image
                     src={product.image}
@@ -49,14 +52,14 @@ function WishlistPage() {
                 <p className="mt-2 text-lg font-bold text-blue-600">
                   ${product.price.toFixed(2)}
                 </p>
+              </Link>
 
                 <div className="mt-4">
                     <AddToCartButton product={product} />
                 </div>
 
-              </Link>
-
               <button
+                type="button"
                 onClick={() => dispatch(toggleWishlist(product))}
                 className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-red-50 py-2 text-red-600 transition hover:bg-red-100"
               >
