@@ -47,7 +47,19 @@ function ProductList({ initialProducts, query, total }: Props) {
       setLoading(false);
     }  
   }
+  if (products.length === 0) {
+    return (
+      <div className="rounded-xl border border-dashed p-10 text-center">
+        <h2 className="text-xl font-semibold">
+          No Products found
+        </h2>
 
+        <p className="mt-2 text-gray-500">
+          Try changing or clearing your filters.
+        </p>
+      </div>
+    )
+  }
   return (
     <>
       <ProductGrid products={products} />
