@@ -5,15 +5,27 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
+import { useHashydrated } from "@/store/useHasHydrated";
 
 function HeaderClient({children}: {children: ReactNode}) {
   const cartItems = useAppSelector((state) => state.cart.items);
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
+
+  const wishlistItems = useAppSelector(
+    (state) => state.wishlist.items,
   );
 
-  const wishlistItems = useAppSelector((state) => state.wishlist.items);
+  const hasHydrated = useHashydrated();
+
+  const totalQuantity = hasHydrated
+   ? cartItems.reduce(
+    (total, item) => total + item.quantity,
+      0,
+    )
+   : 0;
+
+  const wishlistCount = hasHydrated
+   ? wishlistItems.length
+   : 0;
 
   const [search, setSearch] = useState("");
 
@@ -83,9 +95,9 @@ function HeaderClient({children}: {children: ReactNode}) {
             <Link href="/wishlist" className="relative flex items-center">
               <Heart className="h-6 w-6 transition hover:text-red-500" />
 
-              {wishlistItems.length > 0 && (
+              {wishlistCount > 0 && (
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-semibold text-white">
-                  {wishlistItems.length}
+                  {wishlistCount}
                 </span>
               )}
             </Link>

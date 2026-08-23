@@ -4,11 +4,20 @@ import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks"
 import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/store/cartSlice";
+import { useHashydrated } from "@/store/useHasHydrated";
 
 function CartPage() {
     const dispatch = useAppDispatch();
 
-    const cartItems = useAppSelector((state) => state.cart.items);
+    const storedCartItems = useAppSelector(
+        (state) => state.cart.items
+    );
+
+    const hasHydrated = useHashydrated();
+
+    const cartItems = hasHydrated
+     ? storedCartItems
+     : [];
 
     const subtotal = cartItems.reduce(
         (total, item) => total + item.price * item.quantity,

@@ -4,20 +4,12 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
 import { Product } from "@/types/product";
 import { Heart } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import { useHashydrated } from "@/store/useHasHydrated";
 
 type Props = {
     product: Product
 };
 
-const subscribe = () => () => {};
-function useHasHydrated() {
-    return useSyncExternalStore(
-        subscribe,
-        () => true,
-        () => false,
-    );
-}
 
 function WishlistButton({product}: Props) {
     const dispatch = useAppDispatch();
@@ -26,7 +18,7 @@ function WishlistButton({product}: Props) {
         (state) => state.wishlist.items
     );
 
-    const hasHydrated = useHasHydrated();
+    const hasHydrated = useHashydrated();
 
     const isInWishlist =
     hasHydrated &&

@@ -6,13 +6,20 @@ import { Trash2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
 import AddToCartButton from "@/components/Product/AddToCartButton";
+import { useHashydrated } from "@/store/useHasHydrated";
 
 function WishlistPage() {
   const dispatch = useAppDispatch();
 
-  const wishlistItems = useAppSelector(
+  const storedWishlistItems = useAppSelector(
     (state) => state.wishlist.items
   );
+
+  const hasHydrated = useHashydrated();
+
+  const wishlistItems = hasHydrated
+   ? storedWishlistItems
+   : [];
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-10">
