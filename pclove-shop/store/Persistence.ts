@@ -1,55 +1,139 @@
-import { CartState } from "./cartSlice";
-import { WishlistState } from "./wishlistSlice";
+import type { CartState } from "./cartSlice";
+import type { WishlistState } from "./wishlistSlice";
 
-const CART_STORATE_KEY = "pclove-cart";
+const CART_STORAGE_KEY = "pclove-cart";
 const WISHLIST_STORAGE_KEY = "pclove-wishlist";
 
-export function loadCart(): CartState | undefined {
-    try {
-        const serializedCart = localStorage.getItem(CART_STORATE_KEY);
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
 
-        if(!serializedCart) {
-            return undefined;
-        }
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value);
+}
 
-        return JSON.parse(serializedCart);
-    } catch (error) {
-        console.error("Failed to load cart:", error);
-        return undefined;
+function isPositiveInteger(value: unknown): value is number {
+    return (
+        typeof value === "number" &&
+        Number.isInteger(value) &&
+        value > 0
+    );
+}
+
+function isNonNegativeInteger(value: unknown): value is number {
+    return (
+        typeof value === "number" &&
+        Number.isInteger(value) &&
+        value >= 0
+    );
+}
+
+function isValidCartState(value: unknown): value is CartState {
+  if (!isRecord(value) || !Array.isArray(value.items)) {
+    return false;
+  }
+
+  return value.items.every((item) => {
+    if (!isRecord(item)) {
+      return false;
     }
+
+    return (
+      isPositiveInteger(item.id) &&
+      item.id > 0 &&
+      typeof item.title === "string" &&
+      item.title.length > 0 &&
+      isFiniteNumber(item.price) &&
+      item.price >= 0 &&
+      typeof item.image === "string" &&
+      item.image.length > 0 &&
+      isPositiveInteger(item.quantity) &&
+      item.quantity > 0
+    );
+  });
+}
+
+function isValidWishlistState(value: unknown): value is WishlistState {
+  if (!isRecord(value) || !Array.isArray(value.items)) {
+    return false;
+  }
+
+  return value.items.every((item) => {
+    if (!isRecord(item)) {
+      return false;
+    }
+
+    return (
+      isPositiveInteger(item.id) &&
+      item.id > 0 &&
+      typeof item.title === "string" &&
+      item.title.length > 0 &&
+      typeof item.description === "string" &&
+      isFiniteNumber(item.price) &&
+      item.price >= 0 &&
+      typeof item.brand === "string" &&
+      item.brand.length > 0 &&
+      typeof item.category === "string" &&
+      item.category.length > 0 &&
+      typeof item.image === "string" &&
+      item.image.length > 0 &&
+      isNonNegativeInteger(item.stock) &&
+      item.stock >= 0 &&
+      isFiniteNumber(item.rating) &&
+      item.rating >= 0 &&
+      item.rating <= 5
+    );
+  });
+}
+
+function loadFromStorage<T>(
+  key: string,
+  isValid: (value: unknown) => value is T,
+): T | undefined {
+  try {
+    const serializedValue = localStorage.getItem(key);
+
+    if (!serializedValue) {
+      return undefined;
+    }
+
+    const parsedValue: unknown = JSON.parse(serializedValue);
+
+    if (!isValid(parsedValue)) {
+      console.warn(`Ignoring invalid persisted data for "${key}".`);
+      return undefined;
+    }
+
+    return parsedValue;
+  } catch (error) {
+    console.error(`Failed to load persisted data for "${key}":`, error);
+    return undefined;
+  }
+}
+
+function saveToStorage<T>(key: string, value: T) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(`Failed to save persisted data for "${key}":`, error);
+  }
+}
+
+export function loadCart(): CartState | undefined {
+  return loadFromStorage(CART_STORAGE_KEY, isValidCartState);
 }
 
 export function saveCart(cart: CartState) {
-    try{
-        const serializedCart = JSON.stringify(cart);
-
-        localStorage.setItem(CART_STORATE_KEY, serializedCart);
-    } catch(error) {
-        console.error("Failed to save cart:", error);
-    }
+  saveToStorage(CART_STORAGE_KEY, cart);
 }
 
 export function loadWishlist(): WishlistState | undefined {
-    try {
-        const serializedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
-
-        if (!serializedWishlist) {
-            return undefined;
-        }
-
-        return JSON.parse(serializedWishlist);
-    } catch(error) {
-        console.error("Failed to load wishlist:", error);
-        return undefined
-    }
+  return loadFromStorage(
+    WISHLIST_STORAGE_KEY,
+    isValidWishlistState,
+  );
 }
 
 export function saveWishlist(wishlist: WishlistState) {
-    try {
-        const serializedWishlist = JSON.stringify(wishlist);
-
-        localStorage.setItem(WISHLIST_STORAGE_KEY, serializedWishlist);
-    } catch(error) {
-        console.error("Failed to save wishlist:", error)
-    }
+  saveToStorage(WISHLIST_STORAGE_KEY, wishlist);
 }
