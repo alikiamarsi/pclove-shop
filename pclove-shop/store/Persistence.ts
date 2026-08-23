@@ -47,8 +47,9 @@ function isValidCartState(value: unknown): value is CartState {
       item.price >= 0 &&
       typeof item.image === "string" &&
       item.image.length > 0 &&
+      isPositiveInteger(item.stock) &&
       isPositiveInteger(item.quantity) &&
-      item.quantity > 0
+      item.quantity <= item.stock
     );
   });
 }

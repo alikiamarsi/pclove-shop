@@ -12,15 +12,21 @@ type Props = {
 function AddToCartButton({product}: Props) {
     const dispatch = useAppDispatch()
 
+    const isOutOfStock = product.stock <= 0;
+
     const handleAddToCart = () => {
-      dispatch(addToCart(product))
+      if(!isOutOfStock) {
+        dispatch(addToCart(product))
+      }
     }
   return (
     <button 
+    type="button"
+    disabled={isOutOfStock}
     onClick={handleAddToCart}
-    className="w-full cursor-pointer rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition hover:bg-blue-700"
+    className="w-full rounded-lg bg-blue-600 py-3 text-lg font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
     >
-        Add to Cart
+        {isOutOfStock ? "Out of Stock" : "Add to Cart"}
     </button>
   )
 }

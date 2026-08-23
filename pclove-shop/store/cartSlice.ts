@@ -19,21 +19,32 @@ const cartSlice = createSlice({
             action: PayloadAction<Product>
         ) => {
             const product = action.payload;
+
+            if(product.stock <= 0) {
+                return;
+            }
+
             const existingItem = state.items.find(
                 (item) => item.id === product.id
             );
 
             if(existingItem) {
-                existingItem.quantity += 1;
-            } else {
+                existingItem.stock = product.stock;
+                existingItem.quantity = Math.min(
+                existingItem.quantity + 1,
+                product.stock,
+                );
+                return;
+            }
                 state.items.push({
                     id: product.id,
                     title: product.title,
                     price: product.price,
                     image: product.image,
+                    stock: product.stock,
                     quantity: 1,
                 })
-            }
+            
         },
 
         increaseQuantity: (
@@ -41,9 +52,9 @@ const cartSlice = createSlice({
             action: PayloadAction<number>
         ) => {
             const item = state.items.find(
-                (item) => item.id === action.payload
+                (cartItem) => cartItem.id === action.payload
             );
-            if(item){
+            if(item && item.quantity < item.stock){
                 item.quantity += 1;
             }
         },
@@ -53,7 +64,7 @@ const cartSlice = createSlice({
             action: PayloadAction<number>
         ) => {
             const item = state.items.find(
-                (item) => item.id === action.payload
+                (cartItem) => cartItem.id === action.payload
             );
 
             if(item && item.quantity > 1) {
@@ -70,12 +81,12 @@ const cartSlice = createSlice({
             )
         },
 
-        setCart: (_state, action: PayloadAction<CartState>) => {
-            return action.payload
-        }
+        setCart: (
+            _state,
+            action: PayloadAction<CartState>,
+        ) => action.payload
     },
-
-})
+});
 
 export const {
     addToCart,

@@ -85,8 +85,16 @@ function CartPage() {
                             </span>
 
                             <button 
+                                type="button"
                                 onClick={() => dispatch(increaseQuantity(item.id))}
-                                className="flex h-9 w-9 items-center justify-center rounded-lg border hover:bg-gray-100"
+                                disabled={item.quantity >= item.stock}
+                                aria-label={`Increase quantity of ${item.title}`}
+                                title={
+                                    item.quantity >= item.stock
+                                        ? "Maximum available quantity reached"
+                                        : "Increase quantity"
+                                }
+                                className="flex h-9 w-9 items-center justify-center rounded-lg border hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 +
                             </button>
