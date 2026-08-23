@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks"
 import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/store/cartSlice";
-import { useHashydrated } from "@/store/useHasHydrated";
+import { useHasHydrated } from "@/store/useHasHydrated";
 
 function CartPage() {
     const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ function CartPage() {
         (state) => state.cart.items
     );
 
-    const hasHydrated = useHashydrated();
+    const hasHydrated = useHasHydrated();
 
     const cartItems = hasHydrated
      ? storedCartItems

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
 import { Product } from "@/types/product";
 import { Heart } from "lucide-react";
-import { useHashydrated } from "@/store/useHasHydrated";
+import { useHasHydrated } from "@/store/useHasHydrated";
 
 type Props = {
     product: Product
@@ -18,7 +18,7 @@ function WishlistButton({product}: Props) {
         (state) => state.wishlist.items
     );
 
-    const hasHydrated = useHashydrated();
+    const hasHydrated = useHasHydrated();
 
     const isInWishlist =
     hasHydrated &&

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
-import { useHashydrated } from "@/store/useHasHydrated";
+import { useHasHydrated } from "@/store/useHasHydrated";
 
 function HeaderClient({children}: {children: ReactNode}) {
   const cartItems = useAppSelector((state) => state.cart.items);
@@ -14,7 +14,7 @@ function HeaderClient({children}: {children: ReactNode}) {
     (state) => state.wishlist.items,
   );
 
-  const hasHydrated = useHashydrated();
+  const hasHydrated = useHasHydrated();
 
   const totalQuantity = hasHydrated
    ? cartItems.reduce(

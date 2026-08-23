@@ -6,7 +6,7 @@ import { Trash2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleWishlist } from "@/store/wishlistSlice";
 import AddToCartButton from "@/components/Product/AddToCartButton";
-import { useHashydrated } from "@/store/useHasHydrated";
+import { useHasHydrated } from "@/store/useHasHydrated";
 
 function WishlistPage() {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ function WishlistPage() {
     (state) => state.wishlist.items
   );
 
-  const hasHydrated = useHashydrated();
+  const hasHydrated = useHasHydrated();
 
   const wishlistItems = hasHydrated
    ? storedWishlistItems
