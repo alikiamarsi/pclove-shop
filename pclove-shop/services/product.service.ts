@@ -15,6 +15,30 @@ type GetProductsParams = {
   search?: string;
 };
 
+function parseNonNegativeNumber(
+  value: string | undefined,
+): number | undefined {
+  if(!value?.trim()) {
+    return undefined
+  }
+
+  const parsedValue = Number(value);
+
+  return Number.isFinite(parsedValue) && parsedValue >= 0
+    ? parsedValue
+    : undefined;
+}
+
+function parseRating(
+  value: string | undefined,
+): number | undefined {
+  const parsedValue = parseNonNegativeNumber(value);
+
+  return parsedValue !== undefined && parsedValue <= 5
+    ? parsedValue
+    : undefined;
+}
+
 export class ProductNotFoundError extends Error {
   constructor(id: string) {
     super(`Product with id "${id}" was not found`);
@@ -49,6 +73,10 @@ export async function getProducts({
 
   let products: Product[] = result.data ?? result;
 
+  const minimumPrice = parseNonNegativeNumber(minPrice);
+  const maximumPrice = parseNonNegativeNumber(maxPrice);
+  const minimumRating = parseRating(rating);
+
   if(category) {
   products = products.filter(
     (product) => product.category === category
@@ -60,22 +88,22 @@ export async function getProducts({
     brands.includes(product.brand))
   }
 
-  if(minPrice) {
+  if(minimumPrice !== undefined) {
     products = products.filter(
-      (product) => product.price >= Number(minPrice)
-    )
+      (product) => product.price >= minimumPrice,
+    );
   }
 
-  if(maxPrice) {
+  if(maximumPrice !== undefined) {
     products = products.filter(
-      (product) => product.price <= Number(maxPrice)
-    )
+      (product) => product.price <= maximumPrice,
+    );
   }
 
-  if(rating) {
+  if(minimumRating !== undefined) {
     products = products.filter(
-      product => product.rating >= Number(rating)
-    )
+      product => product.rating >= minimumRating,
+    );
   }
 
   if(stock === "true") {
