@@ -14,6 +14,7 @@ function ProductList({ initialProducts, query, total }: Props) {
   const [products, setProducts] = useState(initialProducts);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState("");
   const [hasMore, setHasMore] = useState(
     initialProducts.length < total
   );
@@ -22,6 +23,7 @@ function ProductList({ initialProducts, query, total }: Props) {
     if(loading) return;
 
     setLoading(true);
+    setLoadError("");
     
     const nextPage = page + 1;
     const queryString = query ? `&${query}` : "";
@@ -43,6 +45,9 @@ function ProductList({ initialProducts, query, total }: Props) {
 
     } catch (error) {
       console.error("Failed to load more products:", error);
+      setLoadError(
+        "Unable to load more products. Please try again.",
+      );
     } finally {
       setLoading(false);
     }  
@@ -64,7 +69,25 @@ function ProductList({ initialProducts, query, total }: Props) {
     <>
       <ProductGrid products={products} />
 
-      {hasMore && (
+      {loadError && (
+        <div
+          role="alert"
+          className="mt-8 flex flex-wrap items-center gap-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700"
+        >
+          <p>{loadError}</p>
+
+          <button
+            type="button"
+            onClick={loadMore}
+            disabled={loading}
+            className="rounded-md border border-red-300 px-4 py-2 font-semibold transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
+      {hasMore && !loadError && (
         <button
         onClick={loadMore}
         disabled={loading}
