@@ -73,7 +73,7 @@ const [availableBrands, availableCategories, productsResult] =
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-500">
           <Link
             href="/"
-            className="transition hover: text-blue-600"
+            className="transition hover:text-blue-600"
           >
             Home
           </Link>
