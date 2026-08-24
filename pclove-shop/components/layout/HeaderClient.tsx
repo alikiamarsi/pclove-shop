@@ -31,6 +31,32 @@ function HeaderClient({children}: {children: ReactNode}) {
 
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  function updateSearchQuery(value: string) {
+    const params = new URLSearchParams(
+      searchParams.toString(),
+    );
+
+    const trimmedSearch = value.trim();
+
+    if(trimmedSearch) {
+      params.set("search", trimmedSearch);
+    } else {
+      params.delete("search");
+    }
+
+    const query = params.toString();
+
+    router.push(
+      query ? `/products?${query}` : "/products",
+    );
+  }
+
+  function clearSearch() {
+    setSearch("");
+    updateSearchQuery("");
+  }
+
   return (
     <div className="flex flex-1 items-center">
       <div className="relative flex-1 px-8">
@@ -38,9 +64,9 @@ function HeaderClient({children}: {children: ReactNode}) {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              router.push(`/products?search=${encodeURIComponent(search)}`);
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              updateSearchQuery(search);
             }
           }}
           placeholder="Search Products..."
@@ -48,20 +74,11 @@ function HeaderClient({children}: {children: ReactNode}) {
         />
         {search && (
           <button
-            onClick={() => {
-              setSearch("");
-              const category = searchParams.get("category");
-
-              if (category) {
-                router.push(
-                  `/products?category=${encodeURIComponent(category)}`,
-                );
-              } else {
-                router.push("/products");
-              }
-            }}
+            type="button"
+            aria-label="Clear search"
+            onClick={clearSearch}
             className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
-          >
+            >
             ✕
           </button>
         )}
