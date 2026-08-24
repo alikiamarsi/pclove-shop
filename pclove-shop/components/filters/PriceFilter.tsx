@@ -3,19 +3,20 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react";
 import FilterAccordion from "./FilterAccordion";
 
+type PriceFilterFormProps = {
+    initialMinPrice: string;
+    initialMaxPrice: string;
+};
 
-function PriceFilter() {
+function PriceFilterForm({
+    initialMinPrice,
+    initialMaxPrice,
+}: PriceFilterFormProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [minPrice, SetMinPrice] = useState(
-        searchParams.get("minPrice") || ""
-    );
-
-    const [maxPrice, setMaxPrice] = useState(
-        searchParams.get("maxPrice") || ""
-    );
-
+    const [minPrice, SetMinPrice] = useState(initialMinPrice);
+    const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
     const [error, setError] = useState("");
 
     function handleApply() {
@@ -40,7 +41,7 @@ function PriceFilter() {
                 setError("Minimum price cannot be greater than maximum price.");
                 return;
             }
-            
+
             setError("");
 
             const params = new URLSearchParams(
@@ -64,7 +65,6 @@ function PriceFilter() {
             });
     }
   return (
-        <FilterAccordion title="Price Filter">
             <div className="space-y-3">
             <input 
                 type="number"
@@ -101,13 +101,29 @@ function PriceFilter() {
                 <button
                     type="button"
                     onClick={handleApply}
-                    className="w-full rounded bg-blue-600 py-2 text-white"
+                    className="w-full rounded bg-blue-600 py-2 text-white transition hover:bg-blue-700"
                 >
                     Apply
                 </button>
         </div>
-        </FilterAccordion>
   );
+}
+
+function PriceFilter() {
+    const searchParams = useSearchParams();
+
+    const initialMinPrice = searchParams.get("minPrice") || "";
+    const initialMaxPrice = searchParams.get("maxPrice") || "";
+
+    return (
+        <FilterAccordion title="Price Filter">
+            <PriceFilterForm
+                key={`${initialMinPrice}:${initialMaxPrice}`}
+                initialMinPrice={initialMinPrice}
+                initialMaxPrice={initialMaxPrice}
+            />
+        </FilterAccordion>
+    )
 }
 
 export default PriceFilter
