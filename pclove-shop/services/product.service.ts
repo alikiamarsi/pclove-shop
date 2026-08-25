@@ -57,93 +57,56 @@ export async function getProducts({
   stock,
   sort,
   search,
-}
-: GetProductsParams = {}): Promise<{data: Product[]; total: number}> {
+}: GetProductsParams = {}): Promise<{
+  data: Product[];
+  total: number;
+}> {
   const url = new URL(`${API_URL}/products`);
 
-  const res = await fetch(url.toString(), {
-    cache: "no-store",
-  });
+  url.searchParams.set("_page", String(page));
+  url.searchParams.set("_per_page", String(limit));
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
+  if(category) {
+    url.searchParams.set("category", category);
   }
 
- const result = await res.json();
-
-  let products: Product[] = result.data ?? result;
+  brands.forEach((brand) => {
+    url.searchParams.append("brand", brand);
+  });
 
   const minimumPrice = parseNonNegativeNumber(minPrice);
   const maximumPrice = parseNonNegativeNumber(maxPrice);
   const minimumRating = parseRating(rating);
 
-  if(category) {
-  products = products.filter(
-    (product) => product.category === category
-  );
-}
-
-  if(brands.length > 0) {
-    products = products.filter((product) =>
-    brands.includes(product.brand))
-  }
-
-  if(minimumPrice !== undefined) {
-    products = products.filter(
-      (product) => product.price >= minimumPrice,
-    );
+    if(minimumPrice !== undefined) {
+    url.searchParams.set("price:gte", String(minimumPrice));
   }
 
   if(maximumPrice !== undefined) {
-    products = products.filter(
-      (product) => product.price <= maximumPrice,
-    );
+    url.searchParams.set("price:lte", String(maximumPrice));
   }
 
   if(minimumRating !== undefined) {
-    products = products.filter(
-      product => product.rating >= minimumRating,
-    );
+    url.searchParams.set("rating:gte", String(minimumRating));
   }
 
   if(stock === "true") {
-    products = products.filter(
-      (product) => product.stock > 0
-    )
+    url.searchParams.set("stock:gt", "0");
   }
 
   if(search) {
-    products = products.filter((product) => 
-    product.title.toLowerCase().includes(search.toLowerCase())
-    );
+    url.searchParams.set("title_like", search);
   }
 
-  if(sort === "price-asc") {
-    products.sort((a, b) => a.price - b.price);
-  }
-
-  if(sort === "price-desc") {
-    products.sort((a, b) => b.price - a.price);
-  }
-
-  if(sort === "rating-desc") {
-    products.sort((a, b) => b.rating - a.rating)
-  }
-
-  const total = products.length
-  const start = (page - 1) * limit;
-  const end = start + limit;
-
-  products = products.slice(start, end)
-
-  return {
-    data: products,
-    total,
-  }
+  if (sort === "price-asc") {
+  url.searchParams.set("_sort", "price");
+} else if (sort === "price-desc") {
+  url.searchParams.set("_sort", "-price");
+} else if (sort === "rating-desc") {
+  url.searchParams.set("_sort", "-rating");
 }
 
-const fetchAllProducts = cache(async (): Promise<Product[]> => {
-  const res = await fetch(`${API_URL}/products`, {
+  const res = await fetch(url.toString(), {
     cache: "no-store",
   });
 
@@ -153,32 +116,52 @@ const fetchAllProducts = cache(async (): Promise<Product[]> => {
 
   const result = await res.json();
 
-  return result.data ?? result
-})
+  return {
+    data: result.data as Product[],
+    total: result.items,
+  };
+
+}
+
+const fetchAllProducts = cache(async (): Promise<Product[]> => {
+  const res = await fetch(`${API_URL}/products`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const result = await res.json();
+
+  return result.data ?? result;
+});
 
 export const getproduct = cache(async (
-    id: string,
+  id: string,
 ): Promise<Product> => {
-    const res = await fetch(`${API_URL}/products/${id}`, {
-        cache: "no-store",
-    });
+  const res = await fetch(`${API_URL}/products/${id}`, {
+    cache: "no-store",
+  });
 
-    if(res.status === 404) {
-        throw new ProductNotFoundError(id);
-    }
+  if (res.status === 404) {
+    throw new ProductNotFoundError(id);
+  }
 
-    if(!res.ok) {
-      throw new Error("Failed to fetch product")
-    }
+  if (!res.ok) {
+    throw new Error("Failed to fetch product");
+  }
 
-    return res.json()
-})
+  return res.json();
+});
 
 export async function getBrands() {
   const products = await fetchAllProducts();
 
-  return [...new Set(
-    products.map((product) => product.brand))
+  return [
+    ...new Set(
+      products.map((product) => product.brand),
+    ),
   ].sort();
 }
 
@@ -187,6 +170,7 @@ export async function getCategories() {
 
   return [
     ...new Set(
-      products.map((product) => product.category))
+      products.map((product) => product.category),
+    ),
   ].sort();
 }
