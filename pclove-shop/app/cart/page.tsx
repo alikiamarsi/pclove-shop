@@ -5,8 +5,12 @@ import { Trash2 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks"
 import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/store/cartSlice";
 import { useHasHydrated } from "@/store/useHasHydrated";
+import { useRouter } from "next/navigation";
 
 function CartPage() {
+
+    const router = useRouter();
+
     const dispatch = useAppDispatch();
 
     const storedCartItems = useAppSelector(
@@ -155,7 +159,10 @@ function CartPage() {
                             to get <span className="font-semibold">FREE Shipping!</span>
                         </p>
                     )}
-                    <button className="mt-6 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700">
+                    <button 
+                        type="button"
+                        onClick={() => router.push("/checkout")}
+                        className="mt-6 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700">
                         Proceed to Chekout
                     </button>
                 </div>
