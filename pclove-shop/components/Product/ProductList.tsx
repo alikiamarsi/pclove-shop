@@ -15,6 +15,11 @@ function ProductList({ initialProducts, query, total }: Props) {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState("");
+
+  const [mobileColumns, setMobileColumns] = useState<1 | 2>(1);
+
+  const [desktopColumns, setDesktopColumns] = useState<2 | 3 | 4>(4);
+
   const [hasMore, setHasMore] = useState(
     initialProducts.length < total
   );
@@ -67,7 +72,64 @@ function ProductList({ initialProducts, query, total }: Props) {
   }
   return (
     <>
-      <ProductGrid products={products} />
+      <div className="mb-6 flex items-center justify-end">
+  {/* Mobile columns */}
+  <div className="flex items-center gap-2 sm:hidden">
+    <span className="text-sm text-gray-500">View:</span>
+
+    <button
+      type="button"
+      onClick={() => setMobileColumns(1)}
+      className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+        mobileColumns === 1
+          ? "border-blue-600 bg-blue-600 text-white"
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      }`}
+    >
+      1
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setMobileColumns(2)}
+      className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+        mobileColumns === 2
+          ? "border-blue-600 bg-blue-600 text-white"
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      }`}
+    >
+      2
+    </button>
+  </div>
+
+  {/* Desktop columns */}
+  <div className="hidden items-center gap-2 sm:flex">
+    <span className="text-sm text-gray-500">View:</span>
+
+    {[2, 3, 4].map((column) => (
+      <button
+        key={column}
+        type="button"
+        onClick={() =>
+          setDesktopColumns(column as 2 | 3 | 4)
+        }
+        className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+          desktopColumns === column
+            ? "border-blue-600 bg-blue-600 text-white"
+            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+        }`}
+      >
+        {column}
+      </button>
+    ))}
+  </div>
+</div>
+
+      <ProductGrid 
+        products={products}
+        mobileColumns={mobileColumns}
+        desktopColumns={desktopColumns}
+        />
 
       {loadError && (
         <div

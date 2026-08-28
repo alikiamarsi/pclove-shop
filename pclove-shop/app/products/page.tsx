@@ -1,4 +1,5 @@
 import FilterSidebar from "@/components/filters/FilterSidebar";
+import MobileFilters from "@/components/filters/MobileFilters";
 import ProductList from "@/components/Product/ProductList";
 import ProductSort from "@/components/Product/ProductSort";
 import { getBrands, getCategories, getProducts } from "@/services/product.service";
@@ -90,13 +91,22 @@ const [availableBrands, availableCategories, productsResult] =
         <ProductSort />
       </div>
 
-     <div className="flex gap-8">
-      <FilterSidebar 
+     <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+      <div className="hidden lg:block">
+        <FilterSidebar 
         brands={availableBrands} 
         categories={availableCategories}
       />
+      </div>
 
-      <div className="flex-1">
+      <div className="min-w-0 flex-1">
+        <MobileFilters
+          brands={availableBrands}
+          categories={availableCategories}
+        />
+      </div>
+
+      <div className="min-w-0 flex-1">
          <ProductList 
          key={query.toString()}
          total={total}
