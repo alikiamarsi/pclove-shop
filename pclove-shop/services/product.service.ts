@@ -95,7 +95,7 @@ export async function getProducts({
   }
 
   if(search) {
-    url.searchParams.set("title_like", search);
+    url.searchParams.set("title:contains", search);
   }
 
   if (sort === "price-asc") {

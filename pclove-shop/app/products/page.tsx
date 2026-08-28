@@ -92,19 +92,17 @@ const [availableBrands, availableCategories, productsResult] =
       </div>
 
      <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-      <div className="hidden lg:block">
+      <div className="hidden shrink-0 lg:block">
         <FilterSidebar 
         brands={availableBrands} 
         categories={availableCategories}
       />
       </div>
 
-      <div className="min-w-0 flex-1">
         <MobileFilters
           brands={availableBrands}
           categories={availableCategories}
         />
-      </div>
 
       <div className="min-w-0 flex-1">
          <ProductList 
