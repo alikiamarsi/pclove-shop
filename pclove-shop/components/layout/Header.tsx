@@ -4,7 +4,7 @@ import CategoriesDropdown from "../categories/CategoriesDropdown";
 
 function Header() {
   return (
-    <header className="border-b bg-white shadow-sm">
+    <header className="relative z-50 border-b bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link
           href="/"

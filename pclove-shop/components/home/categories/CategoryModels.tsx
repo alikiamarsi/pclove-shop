@@ -18,24 +18,20 @@ function CategoryModels() {
   
   const { size } = useThree();
 
-  const aspect = size.width / size.height;
+  const isMobile = size.width < 640;
 
-  const groupScale =
-    aspect < 1
-    ? 0.7
-    : aspect < 1.5
-    ? 0.85
-    : 1;
+  if(phase !== "categories") return null;
+
 
   if (phase !== "categories") return null;
   return (
-        <group scale={groupScale}>
+        <group scale={isMobile ? 0.8 : 1}>
       
       <CategoryModel
         model={gpu.scene}
         name="GPU"
         category="Graphics Cards"
-        position={[-6, 3, 0]}
+        position={isMobile ? [-2.5, 6, 0] : [-6, 3, 0]}
         rotation={[6, Math.PI * 0.1, 4]}
         scale={0.4}
         floatOffset={0}
@@ -45,7 +41,7 @@ function CategoryModels() {
         model={motherboard.scene}
         name="Motherboard"
         category="Motherboards"
-        position={[0.5, 5, 0]}
+        position={isMobile ? [3, 8, 0] : [0.5, 5, 0]}
         rotation={[5.8, Math.PI * 0.1, 0.5]}
         scale={0.4}
         floatOffset={1.5}
@@ -55,7 +51,7 @@ function CategoryModels() {
         model={cpu.scene}
         name="CPU"
         category="CPU"
-        position={[0, -1.5, 0]}
+        position={isMobile ? [-2, 1, 0] : [0, -1.5, 0]}
         rotation={[0.45, Math.PI * 0.7, 6.9]}
         scale={0.55}
         floatOffset={1}
@@ -65,7 +61,7 @@ function CategoryModels() {
         model={ram.scene}
         name="RAM"
         category="RAM"
-        position={[4.5, 2.8, 0]}
+        position={isMobile ? [2, 1, 0] : [4.5, 2.8, 0]}
         rotation={[1, Math.PI * 0.2, 0]}
         scale={0.3}
         floatOffset={2}
@@ -75,7 +71,7 @@ function CategoryModels() {
         model={cooling.scene}
         name="Cooling"
         category="Cooling"
-        position={[-5.5, -1.8, 0]}
+        position={isMobile ? [-2, -4, 0] : [-5.5, -1.8, 0]}
         rotation={[1.6, Math.PI * 0.2, 2]}
         scale={12}
         floatOffset={0.5}
@@ -85,7 +81,7 @@ function CategoryModels() {
         model={accessories.scene}
         name="Keyboards"
         category="Keyboards"
-        position={[5, -1.5, 0]}
+        position={isMobile ? [2, -4, 0] : [5, -1.5, 0]}
         rotation={[0.35, Math.PI * 0.2, 0.15]}
         scale={0.01}
         floatOffset={2.5}
