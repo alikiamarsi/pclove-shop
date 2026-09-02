@@ -34,9 +34,10 @@ function ProductGrid({
     })
 
     const dismiss = useDismiss(context);
+
     const {getFloatingProps} = useInteractions([
-      dismiss
-    ])
+      dismiss,
+    ]);
 
     const openPreview = useCallback(
       (product: Product, element:HTMLElement) => {

@@ -28,7 +28,7 @@ function WishlistPage() {
       </h1>
 
       {wishlistItems.length === 0 ? (
-        <p className="text-gray-500">
+        <p className="text-gray-500 dark:text-gray-400">
           Your wishlist is empty
         </p>
       ) : (
@@ -36,7 +36,18 @@ function WishlistPage() {
           {wishlistItems.map((product) => (
             <div
               key={product.id}
-              className="rounded-xl border bg-white p-4 shadow-sm"
+              className="
+                rounded-xl
+                border
+                border-gray-200
+                bg-white
+                p-4
+                shadow-sm
+                transition
+                hover:shadow-lg
+                dark:border-gray-700
+                dark:bg-[#182233]
+              "
             >
               <Link
                 href={`/products/${product.id}`}
@@ -52,11 +63,11 @@ function WishlistPage() {
                   />
                 </div>
 
-                <h2 className="mt-4 font-semibold">
+                <h2 className="mt-4 font-semibold text-gray-900 dark:text-gray-100">
                   {product.title}
                 </h2>
 
-                <p className="mt-2 text-lg font-bold text-blue-600">
+                <p className="mt-2 text-lg font-bold text-blue-600 dark:text-blue-400">
                   ${product.price.toFixed(2)}
                 </p>
               </Link>
@@ -68,7 +79,23 @@ function WishlistPage() {
               <button
                 type="button"
                 onClick={() => dispatch(toggleWishlist(product))}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-red-50 py-2 text-red-600 transition hover:bg-red-100"
+                className="
+                  mt-4
+                  flex
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-lg
+                  bg-red-50
+                  py-2
+                  text-red-600
+                  transition
+                  hover:bg-red-100
+                  dark:bg-red-500/10
+                  dark:text-red-400
+                  dark:hover:bg-red-500/20
+                "
               >
                 <Trash2 size={18} />
                 Remove

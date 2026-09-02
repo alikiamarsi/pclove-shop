@@ -66,7 +66,18 @@ async function ProductDetails({params}: PageProps) {
       </div>
       <div className="grid gap-10 lg:grid-cols-2">
         {/* Image */}
-        <div className="rounded-xl border bg-white p-8 shadow-sm">
+        <div
+            className="
+              rounded-xl
+              border
+              border-gray-200
+              bg-white
+              p-8
+              shadow-sm
+              dark:border-gray-800
+              dark:bg-[#182233]
+            "
+          >
           <div className="relative h-112.5 w-full">
 
             <WishlistButton product={product} />
@@ -92,11 +103,30 @@ async function ProductDetails({params}: PageProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="rounded bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-700">
+            <span className="
+                rounded
+                bg-yellow-100
+                px-3
+                py-1
+                text-sm
+                font-medium
+                text-yellow-700
+                dark:bg-yellow-500/10
+                dark:text-yellow-400
+              ">
               ⭐ {product.rating}
             </span>
 
-            <span className="rounded bg-gray-100 px-3 py-1 text-sm">
+            <span className="
+                rounded
+                bg-gray-100
+                px-3
+                py-1
+                text-sm
+                text-gray-700
+                dark:bg-gray-800
+                dark:text-gray-300
+              ">
               {product.category}
             </span>
           </div>
@@ -117,7 +147,7 @@ async function ProductDetails({params}: PageProps) {
               Description
             </h2>
 
-            <p className="leading-7 text-gray-600">
+            <p className="leading-7 text-gray-600 dark:text-gray-400">
               {product.description}
             </p>
           </div>

@@ -3,21 +3,35 @@ import Link from "next/link";
 function CheckoutSuccessPage() {
   return (
     <main className="mx-auto flex min-h-[70vh] w-full max-w-7xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
-      <div className="w-full max-w-lg rounded-2xl border bg-white p-8 text-center shadow-sm">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl text-green-600">
+      <div
+        className="
+          w-full max-w-lg rounded-2xl
+          border border-gray-200 bg-white
+          p-8 text-center shadow-sm
+          dark:border-gray-700
+          dark:bg-[#182233]
+        "
+      >
+        <div
+          className="
+            mx-auto flex h-16 w-16 items-center justify-center
+            rounded-full bg-green-100 text-3xl text-green-600
+            dark:bg-green-500/10 dark:text-green-400
+          "
+        >
           ✓
         </div>
 
-        <h1 className="mt-6 text-3xl font-bold text-gray-900">
+        <h1 className="mt-6 text-3xl font-bold text-gray-900 dark:text-gray-100">
           Order Placed Successfully!
         </h1>
 
-        <p className="mt-3 text-gray-600">
+        <p className="mt-3 text-gray-600 dark:text-gray-400">
           Thank you for your order. We have received your information and your
           order is being processed.
         </p>
 
-        <p className="mt-4 text-sm text-gray-500">
+        <p className="mt-4 text-sm text-gray-500 dark:text-gray-500">
           This is a demo checkout. No payment was processed.
         </p>
 

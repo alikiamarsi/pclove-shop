@@ -9,12 +9,12 @@ import { memo } from "react";
 
 type Props = {
   product: Product;
-  onQuickView?: (product: Product, element: HTMLElement) => void
+  onQuickView?: (product: Product, element: HTMLElement) => void;
 };
 
 function ProductCard({ product, onQuickView}: Props) {
   return (
-    <div className="group relative flex h-full flex-col p-4 overflow-visible rounded-xl bg-white shadow-sm transition hover:shadow-lg">
+    <div className="group relative flex h-full flex-col overflow-visible rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-lg dark:border-gray-800 dark:bg-gray-900">
 
         <WishlistButton product={product} />
 
@@ -39,14 +39,16 @@ function ProductCard({ product, onQuickView}: Props) {
         </div>
 
       <div className="flex flex-1 flex-col p-4">
-        <p className="text-sm text-gray-500">{product.brand}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {product.brand}
+        </p>
 
-        <h2 className="mt-2 line-clamp-2 text-lg font-semibold">
+        <h2 className="mt-2 line-clamp-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
           {product.title}
         </h2>
 
         <div className="mt-auto flex items-center justify-between">
-          <span className="text-xl font-bold text-blue-600">
+          <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
             ${product.price}
           </span>
 

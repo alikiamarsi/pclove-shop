@@ -62,7 +62,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
             }
           }}
           placeholder="Search Products..."
-          className="w-full rounded-lg border px-4 py-2 text-sm outline-none transition focus:border-blue-500"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
         />
 
         {search && (
@@ -70,7 +70,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
             type="button"
             aria-label="Clear search"
             onClick={clearSearch}
-            className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
+            className="absolute right-11 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700 dark:hover:text-gray-200"
           >
             ✕
           </button>
@@ -83,7 +83,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
           <li>
             <Link
               href="/"
-              className="font-medium transition hover:text-blue-600"
+              className="font-medium text-gray-900 transition hover:text-blue-600 dark:text-gray-100"
             >
               Home
             </Link>
@@ -92,7 +92,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
           <li>
             <Link
               href="/products"
-              className="font-medium transition hover:text-blue-600"
+              className="font-medium text-gray-900 transition hover:text-blue-600 dark:text-gray-100"
             >
               Products
             </Link>
@@ -103,7 +103,10 @@ function HeaderClient({ children }: { children: ReactNode }) {
       </nav>
 
       {/* Wishlist */}
-      <Link href="/wishlist" className="relative ml-6 flex items-center">
+      <Link
+        href="/wishlist"
+        className="relative ml-6 flex items-center text-gray-900 dark:text-gray-100"
+      >
         <Heart className="h-6 w-6 transition hover:text-red-500" />
 
         {wishlistCount > 0 && (
@@ -114,7 +117,10 @@ function HeaderClient({ children }: { children: ReactNode }) {
       </Link>
 
       {/* Cart */}
-      <Link href="/cart" className="relative ml-6 flex items-center">
+      <Link
+        href="/cart"
+        className="relative ml-6 flex items-center text-gray-900 dark:text-gray-100"
+      >
         <ShoppingCart className="h-6 w-6 transition hover:text-blue-600" />
 
         {totalQuantity > 0 && (
@@ -128,7 +134,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
       <button
         type="button"
         onClick={() => setIsMenuOpen((previous) => !previous)}
-        className="ml-6 flex items-center md:hidden"
+        className="ml-6 flex items-center text-gray-900 dark:text-gray-100 md:hidden"
         aria-label="Toggle menu"
       >
         {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -136,7 +142,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-x-0 top-16 z-100 border-t bg-white px-4 py-5 shadow-lg md:hidden">
+        <div className="fixed inset-x-0 top-16 z-100 border-t border-gray-200 bg-white px-4 py-5 shadow-lg dark:border-gray-800 dark:bg-gray-950 md:hidden">
           {/* Mobile Search */}
           <div className="relative">
             <input
@@ -150,7 +156,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 }
               }}
               placeholder="Search Products..."
-              className="w-full rounded-lg border px-4 py-2 text-sm outline-none transition focus:border-blue-500"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
             />
 
             {search && (
@@ -158,7 +164,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 type="button"
                 aria-label="Clear search"
                 onClick={clearSearch}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-700 dark:hover:text-gray-200"
               >
                 ✕
               </button>
@@ -171,7 +177,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block font-medium transition hover:text-blue-600"
+                  className="block font-medium text-gray-900 transition hover:text-blue-600 dark:text-gray-100"
                 >
                   Home
                 </Link>
@@ -181,7 +187,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 <Link
                   href="/products"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block font-medium transition hover:text-blue-600"
+                  className="block font-medium text-gray-900 transition hover:text-blue-600 dark:text-gray-100"
                 >
                   Products
                 </Link>
@@ -191,7 +197,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 <button
                   type="button"
                   onClick={() => setIsCategoriesOpen((previous) => !previous)}
-                  className="flex w-full items-center justify-between font-medium"
+                  className="flex w-full items-center justify-between font-medium text-gray-900 dark:text-gray-100"
                 >
                   Categories
                   <ChevronDown
@@ -202,14 +208,14 @@ function HeaderClient({ children }: { children: ReactNode }) {
                 </button>
 
                 {isCategoriesOpen && (
-                  <div className="mt-3 space-y-3 border-l border-gray-200 pl-4">
+                  <div className="mt-3 space-y-3 border-l border-gray-200 pl-4 dark:border-gray-700">
                     <Link
                       href="/products?category=CPU"
                       onClick={() => {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       CPU
                     </Link>
@@ -220,7 +226,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       Graphics Cards
                     </Link>
@@ -231,7 +237,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       Headsets
                     </Link>
@@ -242,7 +248,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       Keyboards
                     </Link>
@@ -253,7 +259,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       Monitors
                     </Link>
@@ -264,7 +270,7 @@ function HeaderClient({ children }: { children: ReactNode }) {
                         setIsMenuOpen(false);
                         setIsCategoriesOpen(false);
                       }}
-                      className="block text-sm text-gray-600 transition hover:text-blue-600"
+                      className="block text-sm text-gray-600 transition hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                     >
                       Mouse
                     </Link>

@@ -27,19 +27,27 @@ function CheckoutPage() {
 
   const total = subtotal + shipping;
 
-  if(hasHydrated && cartItems.length === 0) {
+  if (hasHydrated && cartItems.length === 0) {
     return (
       <main className="mx-auto flex min-h-[70vh] w-full max-w-7xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
-          <h1 className="text-2xl font-bold text-gray-900">
+        <div
+          className="
+            w-full max-w-md rounded-2xl
+            border border-gray-200
+            bg-white p-8 text-center shadow-sm
+            dark:border-gray-800
+            dark:bg-[#182233]
+          "
+        >
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             Your cart is empty
           </h1>
 
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-gray-600 dark:text-gray-400">
             Add som products to your cart before proceeding to checkout.
           </p>
 
-          <button 
+          <button
             type="button"
             onClick={() => router.push("/")}
             className="mt-6 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
@@ -60,11 +68,11 @@ function CheckoutPage() {
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
           Checkout
         </h1>
 
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           Complete your information to place your order.
         </p>
       </div>
@@ -74,8 +82,16 @@ function CheckoutPage() {
           {/* Checkout Form */}
           <section className="space-y-6 lg:col-span-2">
             {/* Customer Information */}
-            <div className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900">
+            <div
+              className="
+                rounded-2xl
+                border border-gray-200
+                bg-white p-6 shadow-sm
+                dark:border-gray-800
+                dark:bg-[#182233]
+              "
+            >
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 Customer Information
               </h2>
 
@@ -83,7 +99,7 @@ function CheckoutPage() {
                 <div>
                   <label
                     htmlFor="firstName"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     First Name
                   </label>
@@ -94,14 +110,32 @@ function CheckoutPage() {
                     type="text"
                     required
                     placeholder="John"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:placeholder:text-gray-500
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="lastName"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Last Name
                   </label>
@@ -112,14 +146,32 @@ function CheckoutPage() {
                     type="text"
                     required
                     placeholder="Doe"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:placeholder:text-gray-500
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Email
                   </label>
@@ -130,14 +182,32 @@ function CheckoutPage() {
                     type="email"
                     required
                     placeholder="john@example.com"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:placeholder:text-gray-500
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="phone"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Phone
                   </label>
@@ -148,15 +218,41 @@ function CheckoutPage() {
                     type="tel"
                     required
                     placeholder="+1 234 567 890"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:placeholder:text-gray-500
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   />
                 </div>
               </div>
             </div>
 
             {/* Shipping Information */}
-            <div className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900">
+            <div
+              className="
+                rounded-2xl
+                border border-gray-200
+                bg-white p-6 shadow-sm
+                dark:border-gray-800
+                dark:bg-[#182233]
+              "
+            >
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 Shipping Information
               </h2>
 
@@ -164,7 +260,7 @@ function CheckoutPage() {
                 <div>
                   <label
                     htmlFor="address"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Address
                   </label>
@@ -175,7 +271,25 @@ function CheckoutPage() {
                     type="text"
                     required
                     placeholder="123 Main Street"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:placeholder:text-gray-500
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   />
                 </div>
 
@@ -183,7 +297,7 @@ function CheckoutPage() {
                   <div>
                     <label
                       htmlFor="city"
-                      className="mb-2 block text-sm font-medium text-gray-700"
+                      className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       City
                     </label>
@@ -194,14 +308,32 @@ function CheckoutPage() {
                       type="text"
                       required
                       placeholder="New York"
-                      className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="
+                        w-full rounded-lg
+                        border border-gray-300
+                        bg-white
+                        px-4 py-3
+                        text-gray-900
+                        outline-none
+                        transition
+                        placeholder:text-gray-400
+                        focus:border-blue-500
+                        focus:ring-2
+                        focus:ring-blue-100
+                        dark:border-gray-700
+                        dark:bg-[#111827]
+                        dark:text-gray-100
+                        dark:placeholder:text-gray-500
+                        dark:focus:border-blue-500
+                        dark:focus:ring-blue-500/20
+                      "
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="postalCode"
-                      className="mb-2 block text-sm font-medium text-gray-700"
+                      className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       Postal Code
                     </label>
@@ -212,7 +344,25 @@ function CheckoutPage() {
                       type="text"
                       required
                       placeholder="10001"
-                      className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="
+                        w-full rounded-lg
+                        border border-gray-300
+                        bg-white
+                        px-4 py-3
+                        text-gray-900
+                        outline-none
+                        transition
+                        placeholder:text-gray-400
+                        focus:border-blue-500
+                        focus:ring-2
+                        focus:ring-blue-100
+                        dark:border-gray-700
+                        dark:bg-[#111827]
+                        dark:text-gray-100
+                        dark:placeholder:text-gray-500
+                        dark:focus:border-blue-500
+                        dark:focus:ring-blue-500/20
+                      "
                     />
                   </div>
                 </div>
@@ -220,7 +370,7 @@ function CheckoutPage() {
                 <div>
                   <label
                     htmlFor="country"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Country
                   </label>
@@ -230,11 +380,28 @@ function CheckoutPage() {
                     name="country"
                     defaultValue=""
                     required
-                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    className="
+                      w-full rounded-lg
+                      border border-gray-300
+                      bg-white
+                      px-4 py-3
+                      text-gray-900
+                      outline-none
+                      transition
+                      focus:border-blue-500
+                      focus:ring-2
+                      focus:ring-blue-100
+                      dark:border-gray-700
+                      dark:bg-[#111827]
+                      dark:text-gray-100
+                      dark:focus:border-blue-500
+                      dark:focus:ring-blue-500/20
+                    "
                   >
                     <option value="" disabled>
                       Select country
                     </option>
+
                     <option value="us">United States</option>
                     <option value="de">Germany</option>
                     <option value="tr">Türkiye</option>
@@ -247,31 +414,45 @@ function CheckoutPage() {
 
           {/* Order Summary */}
           <aside className="lg:sticky lg:top-6">
-            <div className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900">Order Summary</h2>
+            <div
+              className="
+                rounded-2xl
+                border border-gray-200
+                bg-white p-6 shadow-sm
+                dark:border-gray-800
+                dark:bg-[#182233]
+              "
+            >
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                Order Summary
+              </h2>
 
               <div className="mt-6 space-y-4">
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
                   <span>Items</span>
                   <span>{totalItems}</span>
                 </div>
 
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
                   <span>Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
 
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
                   <span>Shipping</span>
 
-                  <span>
+                  <span
+                    className={
+                      shipping === 0 ? "text-green-600 dark:text-green-400" : ""
+                    }
+                  >
                     {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
                   </span>
                 </div>
 
-                <hr />
+                <hr className="border-gray-200 dark:border-gray-700" />
 
-                <div className="flex justify-between text-lg font-bold text-gray-900">
+                <div className="flex justify-between text-lg font-bold text-gray-900 dark:text-gray-100">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
@@ -279,7 +460,18 @@ function CheckoutPage() {
 
               <button
                 type="submit"
-                className="mt-6 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+                className="
+                  mt-6 w-full rounded-lg
+                  bg-blue-600 py-3
+                  font-semibold text-white
+                  transition
+                  hover:bg-blue-700
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-blue-500
+                  focus:ring-offset-2
+                  dark:focus:ring-offset-[#182233]
+                "
               >
                 Place Order
               </button>

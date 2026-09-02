@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/store/Provider";
 import Haeder from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ThemeProviders from "./ThemeProviders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,16 +32,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>
+        <ThemeProviders>
+          <Providers>
           <Haeder />
           <main className="flex-1">
             {children}
           </main>
           <Footer />
           </Providers>
+        </ThemeProviders>
         </body>
     </html>
   );

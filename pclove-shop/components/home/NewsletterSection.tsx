@@ -17,12 +17,42 @@ function NewsletterSection() {
                 <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 rounded-xl border-white/10 bg-white px-5 py-4 text-gray-900 outline-none transition focus:border-blue-500"
+                className="
+                    flex-1 rounded-xl
+                    border border-gray-200
+                    bg-white
+                    px-5 py-4
+                    text-gray-900
+                    outline-none
+                    transition
+                    placeholder:text-gray-400
+                    focus:border-blue-500
+
+                    dark:border-gray-700
+                    dark:bg-[#182233]
+                    dark:text-gray-100
+                    dark:placeholder:text-gray-500
+                    "
                 />
 
                 <button
                     type="submit"
-                    className="rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700"
+                    className="
+                        flex-1 rounded-xl
+                        border border-gray-200
+                        bg-white
+                        px-5 py-4
+                        text-gray-900
+                        outline-none
+                        transition
+                        placeholder:text-gray-400
+                        focus:border-blue-500
+
+                        dark:border-gray-700
+                        dark:bg-[#182233]
+                        dark:text-gray-100
+                        dark:placeholder:text-gray-500
+                        "
                 >
                     Subscribe
                 </button>
