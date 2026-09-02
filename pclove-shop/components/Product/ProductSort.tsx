@@ -2,7 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sortOptions = [
     {
@@ -28,12 +28,12 @@ function ProductSort() {
     const searchParams = useSearchParams();
 
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const currentSort = searchParams.get("sort") || "";
 
-    const selectedOption =
-        sortOptions.find((option) => option.value === currentSort) ??
-        sortOptions[0];
+    const currentLabel = 
+      sortOptions.find((option) => option.value === currentSort)?.label || "Featured";
 
     function handleSortChange(value: string) {
         const params = new URLSearchParams(
@@ -54,42 +54,85 @@ function ProductSort() {
 
             setIsOpen(false);
     }
+
+    useEffect(() => {
+      function handleClickOutside(event: MouseEvent) {
+        if(
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target as Node)
+        ) {
+          setIsOpen(false);
+        }
+      }
+
+      function handleScroll(){
+        setIsOpen(false);
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      window.addEventListener("scroll", handleScroll, true);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        window.removeEventListener("scroll", handleScroll, true);
+      };
+    }, []);
+
     return (
     <div className="relative flex items-center gap-3">
-      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
         Sort by:
-      </label>
+      </span>
 
-      <div className="relative">
+      <div ref={dropdownRef} className="relative">
         <button
           type="button"
           onClick={() => setIsOpen((previous) => !previous)}
-          className="flex min-w-36 items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 transition hover:border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:border-gray-500"
+          className="flex min-w-48 items-center justify-between gap-3
+            rounded-lg border border-gray-300
+            bg-white px-3 py-2
+            text-sm text-gray-900
+            transition
+            hover:border-blue-400
+            dark:border-gray-700
+            dark:bg-[#182233]
+            dark:text-gray-100"
         >
-          <span>{selectedOption.label}</span>
+          {currentLabel}
 
           <ChevronDown
-            className={`h-4 w-4 transition-transform duration-300 ${
+            className={`transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""
             }`}
           />
         </button>
 
         <div
-          className={`absolute right-0 top-full z-50 mt-2 w-full origin-top overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg transition-all duration-300 ease-out dark:border-gray-700 dark:bg-gray-900 ${
+          className={`absolute right-0 top-full z-50 mt-2 w-full
+            overflow-hidden rounded-lg
+            border border-gray-200
+            bg-white shadow-lg
+            transition-all duration-200 ease-out
+            dark:border-gray-700
+            dark:bg-[#182233] 
+            ${
             isOpen
-              ? "pointer-events-auto translate-y-0 opacity-100"
-              : "pointer-events-none -translate-y-2 opacity-0"
+              ? "visible translate-y-0 opacity-100"
+              : "invisible -translate-y-2 opacity-0"
           }`}
         >
           {sortOptions.map((option) => (
             <button
-              key={option.value || "featured"}
+              key={option.value}
               type="button"
               onClick={() => handleSortChange(option.value)}
-              className={`block w-full px-3 py-2 text-left text-sm transition ${
+              className={
+                `w-full px-4 py-2.5
+                text-left text-sm
+                transition-colors 
+                ${
                 currentSort === option.value
-                  ? "bg-blue-600 text-white"
+                  ? "bg-blue-50 font-medium text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
                   : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
               }`}
             >
