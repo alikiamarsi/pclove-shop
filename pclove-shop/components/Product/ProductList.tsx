@@ -75,36 +75,28 @@ function ProductList({ initialProducts, query, total }: Props) {
       <div className="mb-6 flex items-center justify-end">
   {/* Mobile columns */}
   <div className="flex items-center gap-2 sm:hidden">
-    <span className="text-sm text-gray-500">View:</span>
+    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">View:</span>
 
-    <button
-      type="button"
-      onClick={() => setMobileColumns(1)}
-      className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
-        mobileColumns === 1
-          ? "border-blue-600 bg-blue-600 text-white"
-          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+  {[1, 2].map((column) => (
+        <button
+          key={column}
+          type="button"
+          onClick={() => setMobileColumns(column as 1 | 2)}
+          className={`rounded-md border px-3 py-2 text-sm font-medium transition-all duration-200 ${
+          mobileColumns === column
+          ? "scale-105 border-blue-600 bg-blue-600 text-white shadow-sm"
+          : "border-gray-300 bg-white text-gray-700 hover:border-blue-400 hover:bg-gray-50 dark:border-gray-700 dark:bg-[#182233] dark:text-gray-300 dark:hover:border-blue-500 dark:hover:bg-gray-800"
       }`}
     >
-      1
+      {column}
     </button>
 
-    <button
-      type="button"
-      onClick={() => setMobileColumns(2)}
-      className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
-        mobileColumns === 2
-          ? "border-blue-600 bg-blue-600 text-white"
-          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-      }`}
-    >
-      2
-    </button>
+  ))}
   </div>
 
   {/* Desktop columns */}
   <div className="hidden items-center gap-2 sm:flex">
-    <span className="text-sm text-gray-500">View:</span>
+    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">View:</span>
 
     {[2, 3, 4].map((column) => (
       <button
@@ -113,10 +105,18 @@ function ProductList({ initialProducts, query, total }: Props) {
         onClick={() =>
           setDesktopColumns(column as 2 | 3 | 4)
         }
-        className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+        className={`rounded-md border px-3 py-2 text-sm font-medium transition duration-200 ${
           desktopColumns === column
-            ? "border-blue-600 bg-blue-600 text-white"
-            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+            ? "scale-105 border-blue-600 bg-blue-600 text-white shadow-sm"
+            : `
+              border-gray-300 bg-white text-gray-700
+              hover:border-blue-400 hover:bg-gray-50
+              dark:border-gray-700
+              dark:bg-[#182233]
+              dark:text-gray-300
+              dark:hover:border-blue-500
+              dark:hover:bg-gray-800
+              `
         }`}
       >
         {column}
@@ -134,7 +134,14 @@ function ProductList({ initialProducts, query, total }: Props) {
       {loadError && (
         <div
           role="alert"
-          className="mt-8 flex flex-wrap items-center gap-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700"
+          className="
+            mt-8 flex flex-wrap items-center gap-4
+            rounded-lg border border-red-200
+            bg-red-50 p-4 text-red-700
+            dark:border-red-500/20
+            dark:bg-red-500/10
+            dark:text-red-400
+            "
         >
           <p>{loadError}</p>
 
@@ -142,7 +149,16 @@ function ProductList({ initialProducts, query, total }: Props) {
             type="button"
             onClick={loadMore}
             disabled={loading}
-            className="rounded-md border border-red-300 px-4 py-2 font-semibold transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
+            className="
+            rounded-md border border-red-300
+              px-4 py-2 font-semibold
+              transition
+              hover:bg-red-100
+              disabled:cursor-not-allowed
+              disabled:opacity-50
+              dark:border-red-500/30
+              dark:hover:bg-red-500/10
+              "
           >
             Try again
           </button>
@@ -153,7 +169,15 @@ function ProductList({ initialProducts, query, total }: Props) {
         <button
         onClick={loadMore}
         disabled={loading}
-        className="mt-8 rounded-lg bg-blue-600 px-6 py-2 text-white"
+        className="
+            mt-8 rounded-lg
+            bg-blue-600 px-6 py-2
+            text-white
+            transition
+            hover:bg-blue-700
+            disabled:cursor-not-allowed
+            disabled:opacity-50
+            "
       >
         {loading ? "Loading..." : "Load More"}
       </button>

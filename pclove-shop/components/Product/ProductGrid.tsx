@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { useCallback, useEffect, useState } from "react";
 import ProductPreview from "./ProductPreview";
 import { useFloating ,offset, flip, shift, useDismiss, useInteractions } from "@floating-ui/react";
+import{motion} from "framer-motion"
 type Props = {
   products: Product[];
   mobileColumns: 1 | 2;
@@ -63,10 +64,12 @@ function ProductGrid({
       }
 
       document.addEventListener("keydown", handleKeyDown);
+
       return () => {
         document.removeEventListener("keydown", handleKeyDown)
       }
-    }, [])
+    }, []);
+    
       const mobileGridClass =
         mobileColumns === 1
         ? "grid-cols-1"
@@ -80,14 +83,31 @@ function ProductGrid({
           : "sm:grid-cols-4";
 
   return (
-    <div className={`grid gap-6 ${mobileGridClass} ${desktopGridClass}`}>
-      {products.map((product) => (
-        <ProductCard 
+    <>
+          <motion.div
+        layout
+        transition={{
+          duration: 0.35,
+          ease: "easeInOut",
+        }}
+        className={`grid gap-6 ${mobileGridClass} ${desktopGridClass}`}
+      >
+        {products.map((product) => (
+          <motion.div
+            layout
             key={product.id}
-            product={product}
-            onQuickView={openPreview}
-        />
-      ))}
+            transition={{
+              duration: 0.35,
+              ease: "easeInOut",
+            }}
+          >
+            <ProductCard
+              product={product}
+              onQuickView={openPreview}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
 
       {previewProduct && isPreviewOpen && (
         <ProductPreview 
@@ -98,7 +118,7 @@ function ProductGrid({
         floatingProps={getFloatingProps()}
         />
       )}
-    </div>
+    </>
   );
 }
 
